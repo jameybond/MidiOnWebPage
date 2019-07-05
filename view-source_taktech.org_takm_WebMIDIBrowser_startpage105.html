@@ -1,0 +1,1331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    span.s1 {font-kerning: none}
+    span.s2 {text-decoration: underline ; font-kerning: none; color: #0000ee; -webkit-text-stroke: 0px #0000ee}
+    td.td1 {margin: 0.5px 0.5px 0.5px 0.5px; padding: 1.0px 1.0px 1.0px 1.0px}
+    td.td2 {width: 693.0px; margin: 0.5px 0.5px 0.5px 0.5px; padding: 1.0px 1.0px 1.0px 1.0px}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"></span><br></p>
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;html&gt;</span></p>
+        <p class="p2"><span class="s1">&lt;head&gt;&lt;meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;script type="text/javascript"&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var midiAccess = null;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var midiInputs = null;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var midiOutputs = null;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function printString(str) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var messagelog = document.getElementById('messagelog');</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">messagelog.innerHTML += str + "\n";</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">messagelog.scrollTop = messagelog.scrollHeight;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function printReceivedMessage(portName, data) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var str = "port:" + portName + " ";</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">for (var i = 0; i &lt; data.length; i++) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">str += data[i].toString(16) + " ";</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">printString(str);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function clearLog() {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">document.getElementById("messagelog").innerHTML = "";</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function setup() {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var messagelog = document.getElementById('messagelog');</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">if (window.navigator.requestMIDIAccess) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">window.navigator.requestMIDIAccess({sysex:false}).then( success, function() { messagelog.innerHTML += "requestMIDIAccess() failed."; });</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">} else {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">messagelog.innerHTML += "Web MIDI API is not available on your browser.\n";</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function setupEventHandler() {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var inputs = [];</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var iter = midiAccess.inputs.values();</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">for (var o = iter.next(); !o.done; o = iter.next()) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">inputs.push(o.value);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">for (var port = 0; port &lt; inputs.length; port++) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">inputs[port].onmidimessage = function (event) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">printReceivedMessage(event.port, event.data);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">};</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">inputs[port].onstatechange = function (event) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var port = event.port;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">printString("MIDIInputPort onstatechange name:" + port.name + " connection:" + port.connection + " state:" + port.state);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">};</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var outputs = [];</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var iter = midiAccess.outputs.values();</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">for (var o = iter.next(); !o.done; o = iter.next()) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">outputs.push(o.value);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">for (var port = 0; port &lt; outputs.length; port++) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">outputs[port].onstatechange = function (event) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var port = event.port;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">printString("MIDIOutputPort onstatechange name:" + port.name + " connection:" + port.connection + " state:" + port.state);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">};</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">midiInputs = inputs;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">midiOutputs = outputs;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function success(access) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">midiAccess = access;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">midiAccess.onstatechange = function(event) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var port = event.port;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">printString("MIDIAccess onstatechange name:" + port.name + " connection:" + port.connection + " state:" + port.state);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">if (port.type == "input") {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">port.onmidimessage = function (event) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">printReceivedMessage(port.name, event.data);</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">};</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">};</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">setupEventHandler();</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function noteOn() {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var iter = midiAccess.outputs.values();</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">for (var o = iter.next(); !o.done; o = iter.next()) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">o.value.send( [0x90, 60, 0x40] , window.performance.now() );</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">function noteOff() {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var iter = midiAccess.outputs.values();</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">for (var o = iter.next(); !o.done; o = iter.next()) {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">o.value.send( [0x80, 60, 0x00] , window.performance.now() );</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">window.onload = function() {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">setup();</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;/script&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;style type="text/css"&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">.button {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">color: #000000;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">font-family: sans-serif;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">font-weight: bold;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">text-align: center;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">text-decoration: none;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">border: 2px solid #cccccc;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">border-radius: 10px;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">padding: 10px 0;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">display: block;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">.messagelog {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">background: #eeeeee;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">border: 2px solid #888888;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">border-radius: 10px;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">padding: 10px;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">height: 40%;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">overflow: auto;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">.title {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">color: #777777;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">font-family: sans-serif;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">html,body {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">overflow: hidden;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">height: 100%;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">}</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;/style&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;/head&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;!-- &lt;body ontouchmove="event.preventDefault()"&gt; --&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;body&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;h1 class="title"&gt;MIDI input monitor&lt;/h1&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;pre id="messagelog" class="messagelog"&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;/pre&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;a href="<a href="about:blank"><span class="s2">javascript:clearLog()</span></a>" class="button"&gt;Clear&lt;/a&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;h1 class="title"&gt;MIDI output test&lt;/h1&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;a href="<a href="about:blank"><span class="s2">javascript:noteOn()</span></a>" class="button" style="width: 48%; float: left;"&gt;Note On C3&lt;/a&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;a href="<a href="about:blank"><span class="s2">javascript:noteOff()</span></a>" class="button" style="width: 48%; float: right;"&gt;Note Off C3&lt;/a&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;script type="text/javascript"&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;/script&gt;&lt;script src="<a href="http://taktech.org/takm/WebMIDIBrowser/startpage_files/ga.js"><span class="s2">./startpage_files/ga.js</span></a>" type="text/javascript"&gt;&lt;/script&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;script type="text/javascript"&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">try {</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">var pageTracker = _gat._getTracker("UA-20653559-1");</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">pageTracker._trackPageview();</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">} catch(err) {}&lt;/script&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p2"><span class="s1">&lt;/body&gt;</span></p>
+        <p class="p2"><span class="s1">&lt;/html&gt;</span></p>
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle" class="td1">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+      <td valign="middle" class="td2">
+        <p class="p1"><span class="s1"></span><br></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
