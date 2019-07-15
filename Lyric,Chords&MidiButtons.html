@@ -66,9 +66,25 @@ function noteOn(note) {
           
         }}
 window.onload = function() {setup();}
-
-
 </script>
+
+<style type="text/css">
+.button {
+    color: #000000;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    padding: 10px 0;
+    display: block;
+}
+
+
+
+</style>
+
 <\head>
 
 <body>
@@ -83,7 +99,7 @@ window.onload = function() {setup();}
                                 </div>
                         </div>
 
-<p ontouchstart="noteOn(D,0)">Touch me!</p>
+<p class="button" ontouchstart="noteOn(D,0)">Touch me!</p>
 
 <iframe src="https://www.worshiptogether.com/songs/lion-and-the-lamb/">
   <p>Your browser does not support iframes.</p>
