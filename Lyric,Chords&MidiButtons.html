@@ -57,7 +57,7 @@ function noteOff() {
         }
     }
 
-function noteOn(note) {
+function noteOn(note, m) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
             o.value.send( [0x90, note, 0x7f] , window.performance.now() );
@@ -94,17 +94,17 @@ window.onload = function() {setup();}
                                     <div class="chord-pro-lyric">Who can stop the </div>
                                 </div>
                                 <div class="chord-pro-segment">
-<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(D,0)">D</button></div>
+<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(D,m)">Dm</button></div>
 <div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(C,0)">C</button></div>
-<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(B,0)">B</button></div>
-<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(A,0)">A</button></div>
+<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(G,0)">G</button></div>
+<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(A,m)">Am</button></div>
 <div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(G,0)">G</button></div>
 <div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(F,0)">F</button></div>
-<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(E,0)">E</button></div>
-<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(D,0)">D</button></div>
+<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(E,m)">Em</button></div>
+<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(D,m)">Dm</button></div>
 <div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(C,0)">C</button></div>
 <div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(B,0)">B</button></div>
-<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(A,0)">A</button></div>
+<div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(A,m)">Am</button></div>
 <div class="chord-pro-note"> <button class="button" style="width: 20%; float: right;" ontouchstart="noteOn(G,0)">G</button></div>
                    
 <div class="chord-pro-lyric">Lord Almighty</div>
