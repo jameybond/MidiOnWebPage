@@ -55,7 +55,7 @@ function noteOn(note, suf,thd) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
             o.value.send( [0x90, note, 0x7f] , window.performance.now() );
-          o.value.send( [0x90, note+4+m, 0x7f], window.performance.now() );
+          o.value.send( [0x90, note+4+ suf, 0x7f], window.performance.now() );
           o.value.send( [0x90, note+7+thd, 0x7f], window.performance.now() );
           
         }}
