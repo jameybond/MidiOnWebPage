@@ -1,3 +1,5 @@
+
+    
 <HTML>
 <head>
 
@@ -20,49 +22,41 @@ var midiAccess = null;
         if (window.navigator.requestMIDIAccess) {
             window.navigator.requestMIDIAccess({sysex:false}).then( success);
         } 
-
         function setupEventHandler() {
             var inputs = [];
             var iter = midiAccess.inputs.values();
             for (var o = iter.next(); !o.done; o = iter.next()) {
                 inputs.push(o.value);
             }
-
             var outputs = [];
             var iter = midiAccess.outputs.values();
             for (var o = iter.next(); !o.done; o = iter.next()) {
                 outputs.push(o.value);
             }
-
             midiInputs = inputs;
             midiOutputs = outputs;
         }
-
         function success(access) {
             midiAccess = access;
             midiAccess.onstatechange = function(event) {
                 var port = event.port;
               };
-
 setupEventHandler();
         }
     }
-
   
-
 function noteOff() {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
             o.value.send( [0x80, 60, 0x00] , window.performance.now() );
         }
     }
-
-function noteOn(note, suf) {
+function noteOn(note, suf,thd) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
             o.value.send( [0x90, note, 0x7f] , window.performance.now() );
           o.value.send( [0x90, note+4+m, 0x7f], window.performance.now() );
-          o.value.send( [0x90, note+7, 0x7f], window.performance.now() );
+          o.value.send( [0x90, note+7+thd, 0x7f], window.performance.now() );
           
         }}
 window.onload = function() {setup();}
@@ -78,39 +72,50 @@ window.onload = function() {setup();}
     border: 2px solid #cccccc;
     border-radius: 10px;
     padding: 10px 0;
-    display: block;    
+    display:block;
+    width: 10%;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+	float:right;
+    margin-left : 90%;  
+   }
+    
+.buttonR {
+    color: #000000;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    padding: 10px 0;
+    display:block;
+    width: 10%;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+	float:right;
+    margin-right : 90%; 
 }
 </style>
 </head>
 <body>
-<!–– <div class="chord-pro-line">
-                                <div class="chord-pro-segment">
-                                        <div class="chord-pro-note"></div>
-                                    <div class="chord-pro-lyric">Who can stop the </div>
-                                </div>
-                                <div class="chord-pro-segment">––>
-<div class="chord-pro-note"> <button class="button"  unselectable="on"style="width: 15%; float: right;" ontouchstart="noteOn(D,m)">Dm</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(C,0)">C</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(G,0)">G</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(A,m)">Am</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(G,0)">G</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(F,0)">F</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(E,m)">Em</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(D,m)">Dm</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(C,0)">C</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(B,0)">B</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(A,m)">Am</button></div><br>
-<div class="chord-pro-note"> <button class="button" style="width: 15%; float: right;" ontouchstart="noteOn(G,0)">G</button></div><br>
-<!––                
-<div class="chord-pro-lyric">Lord Almighty</div>
-                                </div>
-                        </div>
-––>
+
+<button class="button" ontouchstart="noteOn(D,m,0)">Dm</button>
+<button class="button" ontouchstart="noteOn(C,0,0)">C</button>
+<button class="button" ontouchstart="noteOn(B,m,-1)">Bdim</button>
+<button class="button" ontouchstart="noteOn(A,m,0)">Am</button> 
+<button class="button" ontouchstart="noteOn(G,0,0)">G</button>
+<button class="button" ontouchstart="noteOn(F,0,0)">F</button>
+<button class="button" ontouchstart="noteOn(E,m,0)">Em</button>
+<button class="button" ontouchstart="noteOn(D,m,0)">Dm</button> 
+<button class="button" ontouchstart="noteOn(C,0,0)">C</button>
+<button class="button" ontouchstart="noteOn(B,m,-1)">Bdim</button>
+<button class="button" ontouchstart="noteOn(A,m,0)">Am</button>
+<button class="button" ontouchstart="noteOn(G,0,0)">G</button>
 
 
-<iframe src="https://www.worshiptogether.com/songs/lion-and-the-lamb/" width="200" height="200" align="middle">
-  <p>Your browser does not support iframes.</p>
-</iframe>
     
 </body>
 </Html>
