@@ -68,9 +68,9 @@ window.onload = function() {setup();}
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    border: 2px solid #cccccc;
+    border: 1px solid #cccccc;
     border-radius: 10px;
-    padding: 10px 0;
+    padding: 5px 0;
     display:block;
     width: 10%;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -89,29 +89,57 @@ window.onload = function() {setup();}
     border-radius: 10px;
     padding: 10px 0;
     display:block;
-    width: 15%;
+    width: 20%;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
     margin-right : 90%; 
 }
 </style>
+ <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+height: 350px;
+  
+
+}
+
+.left, .right {
+  width: 25%;
+}
+
+.middle {
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
 </head>
 <body>
 
-  
-  <div class="col-sm-3" >Column1
-  
-
-</div>
-
-  
-<div class="col-sm-6" > 
-  <iframe src="https://www.worshiptogether.com/songs/lion-and-the-lamb/" width="500" height="300" align="left">
+  <div class="row">
+  <div class="column left" style="background-color:#aaa;">
+   Column1
+  </div>
+  <div class="column middle" style="background-color:#bbb;">
+    <iframe src="https://www.worshiptogether.com/songs/lion-and-the-lamb/" width="500" height="300" align="left">
 </iframe>
-</div>
 
-<div class="col-sm-3" >
+    
+  </div>
+  <div class="column right" style="background-color:#ccc;">
+   
   
 <button class="button" ontouchstart="noteOn(D,m,0)">Dm</button>
 <button class="button" ontouchstart="noteOn(C,0,0)">C</button>
@@ -125,7 +153,13 @@ window.onload = function() {setup();}
 <button class="button" ontouchstart="noteOn(B,m,-1)">Bdim</button>
 <button class="button" ontouchstart="noteOn(A,m,0)">Am</button>
 <button class="button" ontouchstart="noteOn(G,0,0)">G</button>
+  </div>
 </div>
+  
+
+
+
+
     
 </body>
 </Html>
