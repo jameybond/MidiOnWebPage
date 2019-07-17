@@ -53,9 +53,9 @@ function noteOff() {
 function noteOn(note, suf,thd) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-            o.value.send( [0x90, note, 0x7f] , window.performance.now() );
-          o.value.send( [0x90, note+4+ suf, 0x7f], window.performance.now() );
-          o.value.send( [0x90, note+7+thd, 0x7f], window.performance.now() );
+            o.value.send( [0x92, note, 0x7f] , window.performance.now() );
+          o.value.send( [0x92, note+4+ suf, 0x7f], window.performance.now() );
+          o.value.send( [0x92, note+7+thd, 0x7f], window.performance.now() );
           
         }}
 window.onload = function() {setup();}
@@ -133,7 +133,7 @@ height: 350px;
    Column1
   </div>
   <div class="column middle" style="background-color:#bbb;">
-    <iframe src="https://www.worshiptogether.com/songs/lion-and-the-lamb/"  height="200" align="left" scrolling="no">
+    <iframe src="https://www.worshiptogether.com/songs/lion-and-the-lamb/"  align="left" >
 </iframe>
 
     
