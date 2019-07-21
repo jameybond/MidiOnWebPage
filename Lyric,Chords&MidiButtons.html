@@ -45,8 +45,13 @@ setupEventHandler();
     }
     
   
-  
+var selectElem = document.getElementById('mySelect')
 
+// When a new <option> is selected
+selectElem.addEventListener('change', function() {
+  var x = selectElem.selectedIndex;
+  // Add that data to the <p>
+})  
 
   
 function noteOff() {
@@ -142,7 +147,6 @@ body {margin:0;}
       <option value="audi">B</option>
       
 </select>
- var x = document.getElementById("mySelect").selectedIndex;
       
 <button class="button" ontouchstart="noteOn(D,m,0)">Dm</button>
 <button class="button" ontouchstart="noteOn(C,0,0)">C</button>
