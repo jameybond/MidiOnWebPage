@@ -6,14 +6,14 @@
 var midiAccess = null;
     var midiInputs = null;
     var midiOutputs = null;
-  var C = 60;    // note on, middle C, full velocity
-  var D = 62;    // note on, middle D, full velocity
-  var E = 64;    // note on, middle E, full velocity
-  var F = 65;    // note on, middle F, full velocity
-  var G = 67;    // note on, middle F, full velocity
-  var A = 69;    // note on, middle F, full velocity
-  var B = 71;    // note on, middle F, full velocity
-  var m = -1; // middle note on the chord number
+  var C = 60+x;    // note on, middle C, full velocity
+  var D = 62+x;    // note on, middle D, full velocity
+  var E = 64+x;    // note on, middle E, full velocity
+  var F = 65+x;    // note on, middle F, full velocity
+  var G = 67+x;    // note on, middle F, full velocity
+  var A = 69+x;    // note on, middle F, full velocity
+  var B = 71+x;    // note on, middle F, full velocity
+  var m = -1+x; // middle note on the chord number
   
   
  
@@ -43,6 +43,11 @@ var midiAccess = null;
 setupEventHandler();
         }
     }
+    
+  function myFunction() {
+  var x = document.getElementById("mySelect").selectedIndex;
+}
+
   
 function noteOff() {
         var iter = midiAccess.outputs.values();
