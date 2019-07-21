@@ -46,7 +46,7 @@ setupEventHandler();
      
 function myFunction() {
   var x = document.getElementById("mySelect").selectedIndex;
-      document.getElementByTag("P").innerHTML = "You selected: " + x;
+      document.getElementById("demo").innerHTML = "Key: " + x;
 
 }    
     
@@ -145,7 +145,7 @@ body {margin:0;}
       <option value="audi">B</option>
       
 </select>
-      <p> x </p>
+      <p id="demo"> x </p>
       
 <button class="button" ontouchstart="noteOn(D,m,0)">Dm</button>
 <button class="button" ontouchstart="noteOn(C,0,0)">C</button>
