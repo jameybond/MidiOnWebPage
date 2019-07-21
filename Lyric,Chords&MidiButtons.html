@@ -43,15 +43,13 @@ var midiAccess = null;
 setupEventHandler();
         }
     }
-    
-  
-var selectElem = document.getElementById('mySelect')
+     
+function myFunction() {
+  var x = document.getElementById("mySelect").selectedIndex;
+      document.getElementByTag("P").innerHTML = "You selected: " + x;
 
-// When a new <option> is selected
-selectElem.addEventListener('change', function() {
-  var x = selectElem.selectedIndex;
-  // Add that data to the <p>
-})  
+}    
+    
 
   
 function noteOff() {
@@ -133,7 +131,7 @@ body {margin:0;}
   <div class="navbar">
   
   <br>
-  <select id="mySelect">
+      <select id="mySelect" onchange="myFunction()">
   <option value="volvo">C</option>
   <option value="saab">C#</option>
   <option value="mercedes">D</option>
