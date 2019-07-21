@@ -44,9 +44,9 @@ setupEventHandler();
         }
     }
     
-  function myFunction() {
-  var x = document.getElementById("mySelect").selectedIndex;
-}
+  
+  
+
 
   
 function noteOff() {
@@ -128,7 +128,7 @@ body {margin:0;}
   <div class="navbar">
   
   <br>
-  <select>
+  <select id="mySelect">
   <option value="volvo">C</option>
   <option value="saab">C#</option>
   <option value="mercedes">D</option>
@@ -140,11 +140,9 @@ body {margin:0;}
       <option value="audi">A</option>
       <option value="audi">A#</option>
       <option value="audi">B</option>
-  
-      
-      
       
 </select>
+ var x = document.getElementById("mySelect").selectedIndex;
       
 <button class="button" ontouchstart="noteOn(D,m,0)">Dm</button>
 <button class="button" ontouchstart="noteOn(C,0,0)">C</button>
