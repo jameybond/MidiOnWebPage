@@ -63,9 +63,9 @@ function noteOff(X , Y, Z ) {
 function noteOn(note, suf,thd) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-          o.value.send( [0x80, X, 0x00] , window.performance.now() );
-          o.value.send( [0x80, Y, 0x00] , window.performance.now() );
-          o.value.send( [0x80, Z, 0x00] , window.performance.now() );
+          o.value.send( [0x82, X, 0x00] , window.performance.now() );
+          o.value.send( [0x82, Y, 0x00] , window.performance.now() );
+          o.value.send( [0x82, Z, 0x00] , window.performance.now() );
             
           o.value.send( [0x92, note, 0x7f] , window.performance.now() );
           o.value.send( [0x92, suf, 0x7f], window.performance.now() );
