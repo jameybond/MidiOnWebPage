@@ -68,11 +68,11 @@ function noteOn(note, suf,thd) {
           o.value.send( [0x80, Z, 0x00] , window.performance.now() );
             
           o.value.send( [0x92, note, 0x7f] , window.performance.now() );
-          o.value.send( [0x92, note+4+ suf, 0x7f], window.performance.now() );
-          o.value.send( [0x92, note+7+thd, 0x7f], window.performance.now() );
+          o.value.send( [0x92, suf, 0x7f], window.performance.now() );
+          o.value.send( [0x92, thd, 0x7f], window.performance.now() );
             X = note;
-            Y = note + 4 + suf;
-            Z = note + 7 + thd;
+            Y = suf;
+            Z = thd;
           
         }}
 window.onload = function() {setup();}
