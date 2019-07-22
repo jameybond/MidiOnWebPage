@@ -52,21 +52,19 @@ function myFunction() {
 }    
     
   
-function noteOff( ) {
+function noteOff(note1, note2, note3) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-            o.value.send( [0x82, X, 0x00] , window.performance.now() );
-            o.value.send( [0x82, Y, 0x00] , window.performance.now() );
-            o.value.send( [0x82, Z, 0x00] , window.performance.now() );
+            o.value.send( [0x82, note1, 0x00] , window.performance.now() );
+            o.value.send( [0x82, note2, 0x00] , window.performance.now() );
+            o.value.send( [0x82, note3, 0x00] , window.performance.now() );
 
         }
     }
 function noteOn(note, suf,thd) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-            o.value.send( [0x82, X, 0x00] , window.performance.now() );
-            o.value.send( [0x82, Y, 0x00] , window.performance.now() );
-            o.value.send( [0x82, Z, 0x00] , window.performance.now() );
+            noteOff( X , Y, Z);
             
           o.value.send( [0x92, note, 0x7f] , window.performance.now() );
           o.value.send( [0x92, suf, 0x7f], window.performance.now() );
