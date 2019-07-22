@@ -14,6 +14,10 @@ var midiAccess = null;
   var A = 69;    // note on, middle F, full velocity
   var B = 71;    // note on, middle F, full velocity
   var m = -1; // middle note on the chord number
+  var X = 0;     // to capture note on value that was has been sent so a corresponding note off can be sent
+  var Y = 0;
+  var Z = 0;
+  
   
   
  
@@ -59,9 +63,16 @@ function noteOff() {
 function noteOn(note, suf,thd) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-            o.value.send( [0x92, note, 0x7f] , window.performance.now() );
-          o.value.send( [0x92, note+4+ suf, 0x7f], window.performance.now() );
-          o.value.send( [0x92, note+7+thd, 0x7f], window.performance.now() );
+          o.value.send( [0x80, X, 0x00] , window.performance.now() );
+          o.value.send( [0x80, Y, 0x00] , window.performance.now() );
+          o.value.send( [0x80, Z, 0x00] , window.performance.now() );
+            
+          o.value.send( [0x92, note, 0x7f] , window.performance.now() );
+          o.value.send( [0x92, suf, 0x7f], window.performance.now() );
+          o.value.send( [0x92, thd, 0x7f], window.performance.now() );
+            X = note;
+            Y = suf;
+            Z = thd;
           
         }}
 window.onload = function() {setup();}
@@ -106,23 +117,14 @@ window.onload = function() {setup();}
 body {margin:0;}
 .navbar {
   overflow: hidden;
-  background-color: #3303;
+  background-color: #333;
   position: fixed;
   top: 0;
   right: 0;
   width: 15%;
   height: 100%;
 }
- 
-.navbarL {
-  overflow: hidden;
-  background-color: #3303;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 15%;
-  height: 100%;
-}
+  
   }
 </style>
 </head>
@@ -154,41 +156,22 @@ body {margin:0;}
 </select>
      
       
-<button class="button" ontouchstart="noteOn(D,m,0)">Dm</button>
-<button class="button" ontouchstart="noteOn(C,0,0)">C</button>
-<button class="button" ontouchstart="noteOn(B,m,-1)">Bdim</button>
-<button class="button" ontouchstart="noteOn(A,m,0)">Am</button> 
-<button class="button" ontouchstart="noteOn(G,0,0)">G</button>
-<button class="button" ontouchstart="noteOn(F,0,0)">F</button>
-<button class="button" ontouchstart="noteOn(E,m,0)">Em</button>
-<button class="button" ontouchstart="noteOn(D,m,0)">Dm</button> 
-<button class="button" ontouchstart="noteOn(C,0,0)">C</button>
-<button class="button" ontouchstart="noteOn(B,m,-1)">Bdim</button>
-<button class="button" ontouchstart="noteOn(A,m,0)">Am</button>
-<button class="button" ontouchstart="noteOn(G,0,0)">G</button>
+<button class="button" ontouchstart="noteOn(74,77,81)">Dm</button>
+<button class="button" ontouchstart="noteOn(72,76,79)">C</button>
+<button class="button" ontouchstart="noteOn(71,74,77)">Bdim</button>
+<button class="button" ontouchstart="noteOn(69,72,76)">Am</button> 
+<button class="button" ontouchstart="noteOn(67,71,74)">G</button>
+<button class="button" ontouchstart="noteOn(65,69,72)">F</button>
+<button class="button" ontouchstart="noteOn(64,67,71)">Em</button>
+<button class="button" ontouchstart="noteOn(62,65,69)">Dm</button> 
+<button class="button" ontouchstart="noteOn(60,64,67)">C</button>
+<button class="button" ontouchstart="noteOn(59,62,65)">Bdim</button>
+<button class="button" ontouchstart="noteOn(57,60,64)">Am</button>
+/* <button class="button" ontouchstart="noteOn(55,59,62)">G</button> */
+ <button class="button" ontouchstart="noteOff()">NoteOffC</button> 
 
 </div>
-    
-    
- <div class="navbarL">
   
-  <br>
-     
-<button class="button" ontouchstart="noteOn(D,m,0)">Dm</button>
-<button class="button" ontouchstart="noteOn(C,0,0)">C</button>
-<button class="button" ontouchstart="noteOn(B,m,-1)">Bdim</button>
-<button class="button" ontouchstart="noteOn(A,m,0)">Am</button> 
-<button class="button" ontouchstart="noteOn(G,0,0)">G</button>
-<button class="button" ontouchstart="noteOn(F,0,0)">F</button>
-<button class="button" ontouchstart="noteOn(E,m,0)">Em</button>
-<button class="button" ontouchstart="noteOn(D,m,0)">Dm</button> 
-<button class="button" ontouchstart="noteOn(C,0,0)">C</button>
-<button class="button" ontouchstart="noteOn(B,m,-1)">Bdim</button>
-<button class="button" ontouchstart="noteOn(A,m,0)">Am</button>
-<button class="button" ontouchstart="noteOn(G,0,0)">G</button>
-
-</div>
-    
 <iframe  style="width: 75% ; height: 75%; overflow: hidden" scrolling="yes" src= "https://www.worshiptogether.com/songs/lion-and-the-lamb/"  frameborder="0" allowTransparency="true"></iframe>
 
 
