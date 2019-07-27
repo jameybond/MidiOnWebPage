@@ -65,26 +65,18 @@ function noteOff() {
         }
     }
 function noteOn(note, suf,thd) {
+    noteOff();
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
           o.value.send( [0x92, note, 0x7f] , window.performance.now() );
           o.value.send( [0x92, suf, 0x7f], window.performance.now() );
           o.value.send( [0x92, thd, 0x7f], window.performance.now() );
-            
-            
-        var iter = midiAccess.outputs.values();
-        for (var o = iter.next(); !o.done; o = iter.next()) {
-            o.value.send( [0x82, X, 0x00] , window.performance.now() );
-            o.value.send( [0x82, Y, 0x00] , window.performance.now() );
-            o.value.send( [0x82, Z, 0x00] , window.performance.now() );
-          
+
 
             X = note;
             Y = suf;
             Z = thd;
             document.getElementById("demo").innerHTML = "Value:" + X + Y + Z;
-
-          
         }}
 window.onload = function() {setup();}
 </script>
@@ -165,7 +157,7 @@ body {margin:0;}
       <option value="audi">B</option>
       
 </select>
-<p id="demo">19:36</p>
+<p id="demo">19:41</p>
       
 <button class="button" ontouchstart="noteOn(71,74,77)">Bdim</button>
 <button class="button" ontouchstart="noteOn(69,72,76)">Am</button> 
