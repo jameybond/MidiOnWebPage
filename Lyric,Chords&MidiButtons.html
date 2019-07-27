@@ -70,9 +70,9 @@ function noteOn(note, suf,thd) {
           o.value.send( [0x92, note + key , 0x7f] , window.performance.now() );
           o.value.send( [0x92, suf + key , 0x7f], window.performance.now() );
           o.value.send( [0x92, thd + key , 0x7f], window.performance.now() );
-            X = note;
-            Y = suf;
-            Z = thd;
+            X = note + key ;
+            Y = suf + key ;
+            Z = thd + key ;
         }}
 window.onload = function() {setup();}
 </script>
