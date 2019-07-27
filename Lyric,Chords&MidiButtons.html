@@ -17,6 +17,7 @@ var midiAccess = null;
   var X = 0;     // to capture note on value that was has been sent so a corresponding note off can be sent
   var Y = 0;
   var Z = 0;
+  var key = 0;
   
   
   
@@ -49,7 +50,7 @@ setupEventHandler();
     }
      
 function myFunction() {
-  var key = document.getElementById("mySelect").selectedIndex;
+  key = document.getElementById("mySelect").selectedIndex;
       document.getElementById("demo").innerHTML = "Key: " + key;
 }    
     
