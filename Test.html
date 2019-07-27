@@ -14,10 +14,10 @@ var midiAccess = null;
   var A = 69;    // note on, middle F, full velocity
   var B = 71;    // note on, middle F, full velocity
   var m = -1; // middle note on the chord number
-  var X = 0;
+  var X = 0;     // to capture note on value that was has been sent so a corresponding note off can be sent
   var Y = 0;
   var Z = 0;
- 
+  var key = 0;
   
   
   
@@ -50,8 +50,8 @@ setupEventHandler();
     }
      
 function myFunction() {
-  var x = document.getElementById("mySelect").selectedIndex;
-      document.getElementById("demo").innerHTML = "Key: " + x;
+  key = document.getElementById("mySelect").selectedIndex;
+      document.getElementById("demo").innerHTML = "Key: " + key;
 }    
     
   
@@ -61,29 +61,25 @@ function noteOff() {
             o.value.send( [0x82, X, 0x00] , window.performance.now() );
             o.value.send( [0x82, Y, 0x00] , window.performance.now() );
             o.value.send( [0x82, Z, 0x00] , window.performance.now() );
-
         }
     }
 function noteOn(note, suf,thd) {
     noteOff();
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-          o.value.send( [0x92, note, 0x7f] , window.performance.now() );
-          o.value.send( [0x92, suf, 0x7f], window.performance.now() );
-          o.value.send( [0x92, thd, 0x7f], window.performance.now() );
-
-
-            X = note;
-            Y = suf;
-            Z = thd;
-            document.getElementById("demo").innerHTML = "Value:" + X + Y + Z;
+          o.value.send( [0x92, note + key , 0x7f] , window.performance.now() );
+          o.value.send( [0x92, suf + key , 0x7f], window.performance.now() );
+          o.value.send( [0x92, thd + key , 0x7f], window.performance.now() );
+            X = note + key ;
+            Y = suf + key ;
+            Z = thd + key ;
         }}
 window.onload = function() {setup();}
 </script>
 
 <style type="text/css">
 .button {
-    color: #000000;
+    color: FFFFFF;
     font-family: sans-serif;
     font-weight: bold;
     text-align: left;
@@ -142,8 +138,8 @@ body {margin:0;}
 
   <div class="navbar">
   
-  <br>
-      <select id="mySelect" onchange="myFunction()">
+  <p id="demo"> </p>
+<select id="mySelect" onchange="myFunction()">
   <option value="volvo">C</option>
   <option value="saab">C#</option>
   <option value="mercedes">D</option>
@@ -151,14 +147,14 @@ body {margin:0;}
   <option value="audi">F</option>
   <option value="audi">F#</option> 
   <option value="audi">G</option>
-      <option value="audi">G#</option>
-      <option value="audi">A</option>
-      <option value="audi">A#</option>
-      <option value="audi">B</option>
+  <option value="audi">G#</option>
+  <option value="audi">A</option>
+  <option value="audi">A#</option>
+  <option value="audi">B</option>
+</select>     
       
-</select>
-<p id="demo">19:41</p>
-      
+<button class="button" ontouchstart="noteOn(74,77,81)">Dm</button>
+<button class="button" ontouchstart="noteOn(72,76,79)">C</button>
 <button class="button" ontouchstart="noteOn(71,74,77)">Bdim</button>
 <button class="button" ontouchstart="noteOn(69,72,76)">Am</button> 
 <button class="button" ontouchstart="noteOn(67,71,74)">G</button>
@@ -168,9 +164,7 @@ body {margin:0;}
 <button class="button" ontouchstart="noteOn(60,64,67)">C</button>
 <button class="button" ontouchstart="noteOn(59,62,65)">Bdim</button>
 <button class="button" ontouchstart="noteOn(57,60,64)">Am</button>
-<button class="button" ontouchstart="noteOn(X+2,Y+2 , Z+2)">test</button> 
- <button class="button" ontouchstart="noteOff()">NoteOff</button> 
-      
+<button class="button" ontouchstart="noteOn(55,59,62)">G</button>
 
 </div>
   
