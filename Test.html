@@ -58,8 +58,8 @@ function myFunction() {
 function noteOff(note1, note2, note3) {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-            o.value.send( [0x82, note1, 0x7f] , window.performance.now() );
-            o.value.send( [0x82, note2, 0x7f] , window.performance.now() );
+            o.value.send( [0x82, note1, 0x00] , window.performance.now() );
+            o.value.send( [0x82, note2, 0x00] , window.performance.now() );
             o.value.send( [0x82, note3, 0x00] , window.performance.now() );
 
         }
@@ -156,7 +156,7 @@ body {margin:0;}
       <option value="audi">B</option>
       
 </select>
-<p id="demo"> Value</p>
+<p id="demo"></p>
       
 <button class="button" ontouchstart="noteOn(71,74,77)">Bdim</button>
 <button class="button" ontouchstart="noteOn(69,72,76)">Am</button> 
