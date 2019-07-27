@@ -14,6 +14,9 @@ var midiAccess = null;
   var A = 69;    // note on, middle F, full velocity
   var B = 71;    // note on, middle F, full velocity
   var m = -1; // middle note on the chord number
+  var X = 0;
+  var Y = 0;
+  var Z = 0;
  
   
   
@@ -67,9 +70,9 @@ function noteOn(note, suf,thd) {
           o.value.send( [0x92, note, 0x7f] , window.performance.now() );
           o.value.send( [0x92, suf, 0x7f], window.performance.now() );
           o.value.send( [0x92, thd, 0x7f], window.performance.now() );
-            var X = note;
-            var Y = suf;
-            var Z = thd;
+            X = note;
+            Y = suf;
+            Z = thd;
           
         }}
 window.onload = function() {setup();}
