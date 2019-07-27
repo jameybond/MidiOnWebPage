@@ -73,6 +73,8 @@ function noteOn(note, suf,thd) {
             X = note;
             Y = suf;
             Z = thd;
+                  document.getElementById("demo").innerHTML = "Value:" + X + Y + Z;
+
           
         }}
 window.onload = function() {setup();}
@@ -154,7 +156,7 @@ body {margin:0;}
       <option value="audi">B</option>
       
 </select>
-      <p> X + Y + Z </P>     
+<p id="demo"> Value</p>
       
 <button class="button" ontouchstart="noteOn(74,77,81)">Dm</button>
 <button class="button" ontouchstart="noteOn(72,76,79)">C</button>
