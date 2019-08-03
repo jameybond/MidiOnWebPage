@@ -52,9 +52,20 @@ setupEventHandler();
 function myFunction() {
   key = document.getElementById("mySelect").selectedIndex;
       document.getElementById("demo").innerHTML = "Key: " + key;
+  
+  
+    var buts = document.getElementsByTagName("button");
+    for (var i=0; i <buts.length; i++){
+    var but1 = buts[i];
+  var str = but1.getAttribute("ontouchstart"); 
+  var res = str.slice(7, -1);
+  var arr = res.split(",");
+  var ChordTransposed = "noteOn("+ (Number(arr[0])+ key) + ","+ (Number(arr[1])+ key) +"," + (Number(arr[2])+key) +")";
+  but1.setAttribute("ontouchstart", ChordTransposed);
+  }
+    
 }    
     
-  
 function noteOff() {
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
@@ -67,19 +78,19 @@ function noteOn(note, suf,thd) {
     noteOff();
         var iter = midiAccess.outputs.values();
         for (var o = iter.next(); !o.done; o = iter.next()) {
-          o.value.send( [0x92, note + key , 0x7f] , window.performance.now() );
-          o.value.send( [0x92, suf + key , 0x7f], window.performance.now() );
-          o.value.send( [0x92, thd + key , 0x7f], window.performance.now() );
-            X = note + key ;
-            Y = suf + key ;
-            Z = thd + key ;
+          o.value.send( [0x92, note  , 0x7f] , window.performance.now() );
+          o.value.send( [0x92, suf  , 0x7f], window.performance.now() );
+          o.value.send( [0x92, thd  , 0x7f], window.performance.now() );
+            X = note  ;
+            Y = suf  ;
+            Z = thd  ;
         }}
 window.onload = function() {setup();}
 </script>
 
 <style type="text/css">
 .button {
-    color: #000000;
+    color: FFFFFF;
     font-family: sans-serif;
     font-weight: bold;
     text-align: left;
