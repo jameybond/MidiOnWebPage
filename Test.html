@@ -17,7 +17,7 @@ var midiAccess = null;
   var X = 0;     // to capture note on value that was has been sent so a corresponding note off can be sent
   var Y = 0;
   var Z = 0;
-  var key = 0;
+ 
   
   
   
@@ -50,9 +50,6 @@ setupEventHandler();
     }
      
 function myFunction(x) {
-  key = document.getElementById("mySelect").selectedIndex;
-      document.getElementById("demo").innerHTML = "Key: " + key;
-  
   var buts = document.getElementsByClassName("chordbutton");
 for (var i=0; i <buts.length; i++){
   var chordcap = buts[i].innerHTML;
@@ -166,7 +163,7 @@ body {margin:0;}
 
   <div class="navbar">
   
-  <p id="demo"> </p>
+  <p id="demo"> 23:24</p>
     
 <button class="button" onclick="myFunction(-1)">-Transpose</button>
 
