@@ -49,30 +49,37 @@ setupEventHandler();
         }
     }
      
-function myFunction() {
+function myFunction(x) {
   key = document.getElementById("mySelect").selectedIndex;
       document.getElementById("demo").innerHTML = "Key: " + key;
   
-  
-    var buts = document.getElementsByTagName("button");
-    for (var i=0; i <buts.length; i++){
-    var but1 = buts[i];
-  var str = but1.getAttribute("ontouchstart"); 
-  var res = str.slice(7, -1);
-  var arr = res.split(",");
-  var ChordTransposed = "noteOn("+ (Number(arr[0])+ key) + ","+ (Number(arr[1])+ key) +"," + (Number(arr[2])+key) +")";
-  but1.setAttribute("ontouchstart", ChordTransposed);
+  var buts = document.getElementsByClassName("chordbutton");
+for (var i=0; i <buts.length; i++){
+  var chordcap = buts[i].innerHTML;
+  chordcap =chordcap.trim();
+  var chordary = chordcap.split("");
+  var chordarylen = chordary.length;
+  chord = chordary[0];
+  chordsuf = chordcap.slice(1);  
+  if((chordary[1] == "#") || (chordary[1] == "b")){var chord = chord+chordary[1]; var chordsuf= chordcap.slice(2)};
+  var chordtext = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+  var midinote = [ 60, 61,62,63,64,65,66,67,68,69,70,71];
+  var chordtype = ["m", "dim" , "sus"]
+  var chordnot2 = [-1,-1,1 ]
+  var chordnot3 = [0,-1,7]
+var a = chordtext.indexOf(chord);
+if( ((a+x)==12) || ((a+x)==-1) ){ a = a + ((- (x)) *12) };
+chord = chordtext[a+x]; 
 
+if ( chordsuf =="") {var c = 0; var d = 0 }  
+else {var c = chordnot2[chordtype.indexOf(chordsuf)]; var d = chordnot3[chordtype.indexOf(chordsuf)]};
 
-var chordstr = buts[i].innerHTML;
-var res1 = chordstr.slice(0,1);   
+var ChordTransposed = "noteOn("+ (Number(midinote[a+x])) +","+ (Number(midinote[a+x])+4+c) + "," + (Number(midinote[a+x])+7+d) +")";
 
-var ChordAry = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-
-var a = ChordAry.indexOf(res1);
- but1.innerHTML=ChordAry[a+key];
-
-  }
+buts[i].innerHTML = chord + chordsuf ; 
+buts[i].setAttribute("ontouchstart", ChordTransposed);
+}
+    
   }
       
     
@@ -99,7 +106,7 @@ window.onload = function() {setup();}
 </script>
 
 <style type="text/css">
-.button {
+.chordbutton {
     color: FFFFFF;
     font-family: sans-serif;
     font-weight: bold;
@@ -160,32 +167,25 @@ body {margin:0;}
   <div class="navbar">
   
   <p id="demo"> </p>
-<select id="mySelect" onchange="myFunction()">
-  <option value="volvo">C</option>
-  <option value="saab">C#</option>
-  <option value="mercedes">D</option>
-  <option value="audi">E</option>
-  <option value="audi">F</option>
-  <option value="audi">F#</option> 
-  <option value="audi">G</option>
-  <option value="audi">G#</option>
-  <option value="audi">A</option>
-  <option value="audi">A#</option>
-  <option value="audi">B</option>
-</select>     
+    
+<button class="button" onclick="myFunction(-1)">-Transpose</button>
+
       
-<button class="button" ontouchstart="noteOn(74,77,81)">Dm</button>
-<button class="button" ontouchstart="noteOn(72,76,79)">C</button>
-<button class="button" ontouchstart="noteOn(71,74,77)">Bdim</button>
-<button class="button" ontouchstart="noteOn(69,72,76)">Am</button> 
-<button class="button" ontouchstart="noteOn(67,71,74)">G</button>
-<button class="button" ontouchstart="noteOn(65,69,72)">F</button>
-<button class="button" ontouchstart="noteOn(64,67,71)">Em</button>
-<button class="button" ontouchstart="noteOn(62,65,69)">Dm</button> 
-<button class="button" ontouchstart="noteOn(60,64,67)">C</button>
-<button class="button" ontouchstart="noteOn(59,62,65)">Bdim</button>
-<button class="button" ontouchstart="noteOn(57,60,64)">Am</button>
-<button class="button" ontouchstart="noteOn(55,59,62)">G</button>
+<button class="chordbutton" ontouchstart="noteOn(74,77,81)">Dm</button>
+<button class="chordbutton" ontouchstart="noteOn(72,76,79)">C</button>
+<button class="chordbutton" ontouchstart="noteOn(71,74,77)">Bdim</button>
+<button class="chordbutton" ontouchstart="noteOn(69,72,76)">Am</button> 
+<button class="chordbutton" ontouchstart="noteOn(67,71,74)">G</button>
+<button class="chordbutton" ontouchstart="noteOn(65,69,72)">F</button>
+<button class="chordbutton" ontouchstart="noteOn(64,67,71)">Em</button>
+<button class="chordbutton" ontouchstart="noteOn(62,65,69)">Dm</button> 
+<button class="chordbutton" ontouchstart="noteOn(60,64,67)">C</button>
+<button class="chordbutton" ontouchstart="noteOn(59,62,65)">Bdim</button>
+<button class="chordbutton" ontouchstart="noteOn(57,60,64)">Am</button>
+<button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
+
+      
+<button class="button" onclick="myFunction(1)">+Transpose</button>
 
 </div>
   
