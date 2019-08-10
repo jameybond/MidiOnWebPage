@@ -6,7 +6,7 @@ var buts = document.getElementsByClassName(selectedclass);
 for (var i=0; i <buts.length; i++){
   
   var chordcap = buts[i].innerHTML;
-  chordcap =chordcap.trim(); alert(chordcap);
+  chordcap =chordcap.trim(); 
   var chordary = chordcap.split("");
   var chordarylen = chordary.length;
   var chord = chordary[0];
