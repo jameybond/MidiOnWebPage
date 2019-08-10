@@ -3,21 +3,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" /> 
 
 <script>
-var midiAccess = null;
-    var midiInputs = null;
-    var midiOutputs = null;
-  var C = 60;    // note on, middle C, full velocity
-  var D = 62;    // note on, middle D, full velocity
-  var E = 64;    // note on, middle E, full velocity
-  var F = 65;    // note on, middle F, full velocity
-  var G = 67;    // note on, middle F, full velocity
-  var A = 69;    // note on, middle F, full velocity
-  var B = 71;    // note on, middle F, full velocity
-  var m = -1; // middle note on the chord number
-  var X = 0;     // to capture note on value that was has been sent so a corresponding note off can be sent
-  var Y = 0;
-  var Z = 0;
- 
  var iframe = document.getElementsByTagName('iframe')[0];
 var url = iframe.src;
 var getData = function (data) {
@@ -37,10 +22,26 @@ var loadHTML = function (html) {
     iframe.contentWindow.document.write(html.replace(/<head>/i, '<head><base href="' + url + '"><scr' + 'ipt>document.addEventListener("click", function(e) { if(e.target && e.target.nodeName == "A") { e.preventDefault(); parent.loadURL(e.target.href); } });</scr' + 'ipt>'));
     iframe.contentWindow.document.close();
 }
-
 loadURL(iframe.src);
 
-  
+</script>
+
+<script>
+var midiAccess = null;
+    var midiInputs = null;
+    var midiOutputs = null;
+  var C = 60;    // note on, middle C, full velocity
+  var D = 62;    // note on, middle D, full velocity
+  var E = 64;    // note on, middle E, full velocity
+  var F = 65;    // note on, middle F, full velocity
+  var G = 67;    // note on, middle F, full velocity
+  var A = 69;    // note on, middle F, full velocity
+  var B = 71;    // note on, middle F, full velocity
+  var m = -1; // middle note on the chord number
+  var X = 0;     // to capture note on value that was has been sent so a corresponding note off can be sent
+  var Y = 0;
+  var Z = 0;
+ 
   
  
     function setup() {
