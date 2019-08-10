@@ -18,7 +18,28 @@ var midiAccess = null;
   var Y = 0;
   var Z = 0;
  
-  
+ var iframe = document.getElementsByTagName('iframe')[0];
+var url = iframe.src;
+var getData = function (data) {
+    if (data && data.query && data.query.results && data.query.results.resources && data.query.results.resources.content && data.query.results.resources.status == 200) loadHTML(data.query.results.resources.content);
+    else if (data && data.error && data.error.description) loadHTML(data.error.description);
+    else loadHTML('Error: Cannot load ' + url);
+};
+var loadURL = function (src) {
+    url = src;
+    var script = document.createElement('script');
+    script.src = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20data.headers%20where%20url%3D%22' + encodeURIComponent(url) + '%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=getData';
+    document.body.appendChild(script);
+};
+var loadHTML = function (html) {
+    iframe.src = 'about:blank';
+    iframe.contentWindow.document.open();
+    iframe.contentWindow.document.write(html.replace(/<head>/i, '<head><base href="' + url + '"><scr' + 'ipt>document.addEventListener("click", function(e) { if(e.target && e.target.nodeName == "A") { e.preventDefault(); parent.loadURL(e.target.href); } });</scr' + 'ipt>'));
+    iframe.contentWindow.document.close();
+}
+
+loadURL(iframe.src);
+
   
   
  
@@ -67,12 +88,9 @@ for (var i=0; i <buts.length; i++){
 var a = chordtext.indexOf(chord);
 if( ((a+x)==12) || ((a+x)==-1) ){ a = a + ((- (x)) *12) };
 chord = chordtext[a+x]; 
-
 if ( chordsuf =="") {var c = 0; var d = 0 }  
 else {var c = chordnot2[chordtype.indexOf(chordsuf)]; var d = chordnot3[chordtype.indexOf(chordsuf)]};
-
 var ChordTransposed = "noteOn("+ (Number(midinote[a+x])) +","+ (Number(midinote[a+x])+4+c) + "," + (Number(midinote[a+x])+7+d) +")";
-
 buts[i].innerHTML = chord + chordsuf ; 
 buts[i].setAttribute("ontouchstart", ChordTransposed);
 }
@@ -187,8 +205,6 @@ body {margin:0;}
 </div>
   
 <iframe  style="width: 75% ; height: 75%; overflow: hidden" scrolling="yes" src= "https://www.google.com/search?igu=1"  frameborder="0" allowTransparency="true"></iframe>
-
-
 
     
 </body>
