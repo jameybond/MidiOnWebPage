@@ -1,3 +1,4 @@
+(function() {
 var selectedElement = window.getSelection().anchorNode.parentNode;
 var selectedclass = selectedElement.className;
 var buts = document.getElementsByClassName(selectedclass);
@@ -29,3 +30,4 @@ buts[i].removeAttribute("class");
 
  buts[i].innerHTML = '<button style="border:0.5px solid white; background-color: transparent;" onclick='+ChordTransposed +'>' + chord + chordsuf  + '</button>';
 }
+})();  
