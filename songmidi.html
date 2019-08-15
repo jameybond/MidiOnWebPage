@@ -112,8 +112,9 @@
     function panic() {
       for (var i = 0; i < 16; i++) {
         for (var j = 0; j < 128; j++) {
-          var noteoffval = ("0x8" + i.toString(16) + "," + j + ", 0x00");
-          alert(noteoffval);
+          var p = "0x8"+ i.toString(16)
+          var noteoffval = [p,j , "0x00"];
+          
           noteoff(noteoffval);
         }
       }
