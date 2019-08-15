@@ -111,11 +111,12 @@
 
     function panic() {
       for (var i = 0; i < 16; i++) {
-        for (var j = 0; j < 128; j++) {
+        for (var j = 0; j < 128; j+3) {
           var p = "0x8"+ i.toString(16);
-          var noteoffval = [p,j , "0x00"];
-          
-          noteoff(noteoffval);
+          X = [p,j , "0x00"];
+          Y = [p,j+1 , "0x00"];
+          Z = [p,j+2 , "0x00"];
+          noteoff();
         }
       }
     }
