@@ -135,9 +135,9 @@
         o.value.send([0x92, note, 0x7f], window.performance.now());
         o.value.send([0x92, suf, 0x7f], window.performance.now());
         o.value.send([0x92, thd, 0x7f], window.performance.now());
-        X = [("0x82, " + note + ", 0x00")];
-        Y = [("0x82, " + suf + ", 0x00")];
-        Z = [("0x82, " + thd + ", 0x00")];
+        X = ["0x82", note, "0x00"];
+        Y = ["0x82", suf, "0x00"];
+        Z = ["0x82", thd, "0x00"];
       }
     }
     window.onload = function() {
