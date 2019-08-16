@@ -110,10 +110,14 @@
     }
 
     function panic() {
-      
+      for (var i = 0; i < 16; i++) {
+        for (var j = 0; j < 128; j+3) {
+          var p = "0x82";
        
-          noteoff();
+          noteOff();
         }
+      }
+    }
      
 
     function noteOff() {
