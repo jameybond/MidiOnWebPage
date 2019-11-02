@@ -113,6 +113,15 @@
         Z = ["0x82", thd, "0x00"];
       }
     }
+    
+     function midiothermsg() {
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send(msg, window.performance.now());
+      
+      }
+    }
+    
     window.onload = function() {
       setup();
     }
@@ -157,7 +166,9 @@
 
   <body>
     <div class="navbartop">
-      <button class="button" right=100% onclick="panic()">Panic 4</button>
+      <button class="button" right=100% ontouchstart="panic()">Panic</button>
+      <button class="button" right=100% ontouchstart="midiothermsg("0x99", 24, "0x7f")">RythmStart</button>
+      <button class="button" right=100% ontouchstart="midiothermsg("0x89", 24, "0x00")">RythmStop</button>
     </div>
 
        
