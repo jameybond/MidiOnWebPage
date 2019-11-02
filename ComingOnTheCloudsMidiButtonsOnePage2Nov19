@@ -1,0 +1,503 @@
+<HTML>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+
+  <script>
+    var midiAccess = null;
+    var midiInputs = null;
+    var midiOutputs = null;
+    var C = 60; // note on, middle C, full velocity
+    var D = 62; // note on, middle D, full velocity
+    var E = 64; // note on, middle E, full velocity
+    var F = 65; // note on, middle F, full velocity
+    var G = 67; // note on, middle F, full velocity
+    var A = 69; // note on, middle F, full velocity
+    var B = 71; // note on, middle F, full velocity
+    var m = -1; // middle note on the chord number
+    var X = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent
+    var Y = [0,0,0];
+    var Z = [0,0,0];
+    function setup() {
+      if (window.navigator.requestMIDIAccess) {
+        window.navigator.requestMIDIAccess({
+          sysex: false
+        }).then(success);
+      }
+      function setupEventHandler() {
+        var inputs = [];
+        var iter = midiAccess.inputs.values();
+        for (var o = iter.next(); !o.done; o = iter.next()) {
+          inputs.push(o.value);
+        }
+        var outputs = [];
+        var iter = midiAccess.outputs.values();
+        for (var o = iter.next(); !o.done; o = iter.next()) {
+          outputs.push(o.value);
+        }
+        midiInputs = inputs;
+        midiOutputs = outputs;
+      }
+      function success(access) {
+        midiAccess = access;
+        midiAccess.onstatechange = function(event) {
+          var port = event.port;
+        };
+        setupEventHandler();
+      }
+    }
+    function myFunction(x) {
+      var buts = document.getElementsByClassName("chordbutton");
+      for (var i = 0; i < buts.length; i++) {
+        var chordcap = buts[i].innerHTML;
+        chordcap = chordcap.trim();
+        var chordary = chordcap.split("");
+        var chordarylen = chordary.length;
+        chord = chordary[0];
+        chordsuf = chordcap.slice(1);
+        if ((chordary[1] == "#") || (chordary[1] == "b")) {
+          var chord = chord + chordary[1];
+          var chordsuf = chordcap.slice(2)
+        };
+        var chordtext = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        var midinote = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71];
+        var chordtype = ["m", "dim", "sus"]
+        var chordnot2 = [-1, -1, 1]
+        var chordnot3 = [0, -1, 7]
+        var a = chordtext.indexOf(chord);
+        if (((a + x) == 12) || ((a + x) == -1)) {
+          a = a + ((-(x)) * 12)
+        };
+        chord = chordtext[a + x];
+        if (chordsuf == "") {
+          var c = 0;
+          var d = 0
+        } else {
+          var c = chordnot2[chordtype.indexOf(chordsuf)];
+          var d = chordnot3[chordtype.indexOf(chordsuf)]
+        };
+        var ChordTransposed = "noteOn(" + (Number(midinote[a + x])) + "," + (Number(midinote[a + x]) + 4 + c) + "," + (Number(midinote[a + x]) + 7 + d) + ")";
+        buts[i].innerHTML = chord + chordsuf;
+        buts[i].setAttribute("ontouchstart", ChordTransposed);
+      }
+    }
+    function panic() {
+      for (var i = 0; i < 16; i++) {
+        for (var j = 0; j < 128; j+3) {
+          var p = "0xB2";
+          X = [p,123, "0x00"];
+          Y = ["0xBA",123, "0x00"];
+          noteOff();
+        }
+      }
+    }
+     
+    function noteOff() {
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send(X, window.performance.now());
+        o.value.send(Y, window.performance.now());
+        o.value.send(Z, window.performance.now());
+      }
+    }
+    function noteOn(note, suf, thd) {
+      noteOff();
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send([0x92, note, 0x7f], window.performance.now());
+        o.value.send([0x92, suf, 0x7f], window.performance.now());
+        o.value.send([0x92, thd, 0x7f], window.performance.now());
+        X = ["0x82", note, "0x00"];
+        Y = ["0x82", suf, "0x00"];
+        Z = ["0x82", thd, "0x00"];
+      }
+    }
+    window.onload = function() {
+      setup();
+    }
+  </script>
+
+  <style type="text/css">
+    .chordbutton {
+      color: FFFFFF;
+      font-family: sans-serif;
+      font-weight: bold;
+      text-align: left;
+      text-decoration: none;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      padding: 5px 0;
+      display: block;
+      width: 100%;
+      -webkit-touch-callout: none;
+      /* iOS Safari */
+      -webkit-user-select: none;
+      /* Safari */
+      user-select: none;
+      /* Non-prefixed version, currently supported by Chrome and Opera */
+      margin-left: 0%;
+    }
+  </style>
+  <style>
+    body {
+      margin: 0;
+    }
+    
+    #chordPro p { margin-bottom: 1.5em; }#chordPro p.title { font-weight: bold; color: #979797; margin-bottom: 0.5em; }#chordPro .content { color: #fff; font-size: 0.75em; line-height: 1.5em; padding: 10px 10px 1px; }div.chord-pro-disp {	margin: 5px 5px 15px 5px;	line-height: 18px;  }div.chord-pro-line {	margin: 0 0 0 0;    display: inline-block;    width: 100%;}div.chord-pro-segment {	float: left;	margin: 0 0 0 0;}div.chord-pro-note {    height: 15px;	margin: 0 0 0 0;}div.chord-pro-lyric {    height: 15px;	margin: 0 0 0 0;    white-space: pre;}div.chord-pro-br {    height: 15px;	margin: 0 0 0 0;}
+    
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 5%;
+      right: 0;
+      width: 15%;
+      height: 95%;
+    }
+    .navbartop {
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 5%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    }
+    }
+  </style>
+</head>
+
+<body>
+
+  </style>
+  </head>
+
+  <body>
+    <div class="navbartop">
+      <button class="button" right=100% onclick="panic()">Panic 4</button>
+    </div>
+
+       
+<main role="main"><div class="t-song-details"><div class="t-song-details__info"><div class="container"><div class="row"><div class="col-sm-6"><div class="t-song-details__chords">
+  
+  <div id="chordPro">
+        
+        
+
+        <div class="chordProContainer">
+
+            <div class="chord-pro-disp">
+
+                
+
+                
+
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Intro</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G /// | // Am // | C /// | ////</button></div>
+                                    <div class="chord-pro-lyric"></div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G /// | // Am // | C /// | ////</button></div>
+                                    <div class="chord-pro-lyric"></div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Verse 1</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">He's </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G</button></div>
+                                    <div class="chord-pro-lyric">coming on the clouds kings and kingdoms </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(A,m)">Am</button></div>
+                                    <div class="chord-pro-lyric">will bow </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">down</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(E,m)">Em</button></div>
+                                    <div class="chord-pro-lyric">Every chain will break as </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">broken hearts declare His </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">praise</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Who can stop the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">Lord Almighty</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Chorus</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G</button></div>
+                                    <div class="chord-pro-lyric">   Our God is a Lion the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D/ F#</button></div>
+                                    <div class="chord-pro-lyric">Lion of </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(E,m)">Em</button></div>
+                                    <div class="chord-pro-lyric">Judah</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">He's roaring in power and </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">fighting our </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">battles</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">And every knee will </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">bow before Him</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G</button></div>
+                                    <div class="chord-pro-lyric">   Our God is a Lamb the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D/ F#</button></div>
+                                    <div class="chord-pro-lyric">Lamb that was </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(E,m)">Em</button></div>
+                                    <div class="chord-pro-lyric">slain</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">For the sins of the world His </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">blood breaks the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">chains</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">And every knee will </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">bow before the Lion and the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">Lamb</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Every knee will </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">bow before Him</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Intro</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Verse 2</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G</button></div>
+                                    <div class="chord-pro-lyric">Open up the gate make way before the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(A,m)">Am</button></div>
+                                    <div class="chord-pro-lyric">King of </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">Kings</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">The </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(E,m)">Em</button></div>
+                                    <div class="chord-pro-lyric">God who comes to save is </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">here to set the captives </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">free</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">For who can stop the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">Lord Almighty</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Chorus</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Intro</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Bridge</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(A,m)">Am</button></div>
+                                    <div class="chord-pro-lyric">   Who can stop the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G/ B</button></div>
+                                    <div class="chord-pro-lyric">Lord Almighty</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">   Who can stop the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">Lord Almighty</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(A,m)">Am</button></div>
+                                    <div class="chord-pro-lyric">   Who can stop the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(G,0)">G/ B</button></div>
+                                    <div class="chord-pro-lyric">Lord Almighty</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(C,0)">C</button></div>
+                                    <div class="chord-pro-lyric">   Who can stop the </div>
+                                </div>
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"> <button style="border:0.5px solid white; background-color: transparent;" onclick="noteOn(D,0)">D</button></div>
+                                    <div class="chord-pro-lyric">Lord</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Chorus</div>
+                                </div>
+                        </div>
+                        <div class="chord-pro-br"></div>
+                        <div class="chord-pro-line">
+                                <div class="chord-pro-segment">
+                                        <div class="chord-pro-note"></div>
+                                    <div class="chord-pro-lyric">Intro Out</div>
+                                </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+    
+    
+  </div></div></div></div></div></div></div></div>
+  
+  
+  </main>
+  </body>
+
+</Html>
