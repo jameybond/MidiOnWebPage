@@ -124,7 +124,12 @@
       for (var o = iter.next(); !o.done; o = iter.next()) {
         o.value.send(X, window.performance.now());
         o.value.send(Y, window.performance.now());
-        o.value.send(Z, window.performance.now());}
+        o.value.send(Z, window.performance.now());
+        o.value.send(X1, window.performance.now());
+        o.value.send(Y2, window.performance.now());
+        o.value.send(Z3, window.performance.now());
+      
+      }
     }
 
     function noteOn(note, suf, thd) {
@@ -134,15 +139,23 @@
         o.value.send([0x92, note, 0x7f], window.performance.now());
         o.value.send([0x92, suf, 0x7f], window.performance.now());
         o.value.send([0x92, thd, 0x7f], window.performance.now());
+        o.value.send([0x93, note, 0x7f], window.performance.now());
+        o.value.send([0x93, suf, 0x7f], window.performance.now());
+        o.value.send([0x93, thd, 0x7f], window.performance.now());
         X = ["0x82", note, "0x00"];
         Y = ["0x82", suf, "0x00"];
-        Z = ["0x82", thd, "0x00"];}
+        Z = ["0x82", thd, "0x00"];
+        X1 = ["0x83", note, "0x00"];
+        Y2 = ["0x83", suf, "0x00"];
+        Z3 = ["0x83", thd, "0x00"];}
+      }
     }
     
   window.onload = function() {setup();}
 </script>
- 
+
 <style>
+
  .body {margin: 0;}
 
 .navbartop {
@@ -221,9 +234,10 @@
 .button6 {float: right; width: 10%;}
 .button7 {float: right; width: 15%;}
 
-.midframe {width: 75% ; height: 75%;  left: 10; top: 8%; overflow: "hidden" scrolling="yes" frameborder="0" allowTransparency="true"}
+.midframe {height: 100%;     scrolling="yes" frameborder="0" allowTransparency="true"}
 
- .frame {
+
+.frame {
       overflow: hidden;
       background-color: #33653;
       position: fixed;
@@ -233,14 +247,10 @@
       height: 100%;
     }
 
-.resp-container {
-    position: relative;
-    overflow: hidden;
-    padding-top: 56.25%;
-}
 
-
+ 
 </style>
+
 </head>
 
 
