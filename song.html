@@ -3,6 +3,101 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
+  
+<style>
+.body {margin: 0;}
+  
+.navbartop {
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 8%;
+      background-color: rgba(0, 0, 0, 0.4);
+}
+
+.navbarright {
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 8%;
+      right: 0;
+      width: 15%;
+      height: 95%;
+    }
+
+.navbarleft {
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 8%;
+      left: 0;
+      width: 15%;
+      height: 95%;
+    }
+
+.chordbutton {
+      color: FFFFFF;
+      font-family: sans-serif;
+      font-weight: bold;
+      text-align: left;
+      text-decoration: none;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      padding: 5px 0;
+      display: block;
+      width: 100%;
+      -webkit-touch-callout: none;
+      /* iOS Safari */
+      -webkit-user-select: none;
+      /* Safari */
+      user-select: none;
+      /* Non-prefixed version, currently supported by Chrome and Opera */
+      margin-left: 0%;
+    }
+
+
+.btn-group .button {
+  background-color: #4CAF50; /* Green */
+  border: 1px solid green;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-group .button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+
+.button1 {float: left; width: 15%;}
+.PresetSelect { right; width: 15%;}
+.button3 {float: right; width: 10%;}
+.button4 {float: right; width: 10%;}
+.button5 {float: right; width: 10%;}
+.button6 {float: right; width: 10%;}
+.button7 {float: right; width: 15%;}
+
+.midframe {height: 100%;     scrolling="yes" frameborder="0" allowTransparency="true"}
+
+
+.frame {
+      overflow: hidden;
+      background-color: #33653;
+      position: fixed;
+      top: 8%;
+      left: 15%;
+      width: 70%;
+      height: 100%;
+    }
+</style>
+  
+  
 <script>
     var iframe = document.getElementsByTagName('iframe')[0];
     var url = iframe.src;
@@ -44,7 +139,11 @@
     var X1 = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent
     var Y2 = [0,0,0];
     var Z3 = [0,0,0];
+    var P = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent for Bass Notes
+    var Q = [0,0,0];
+    var R = [0,0,0];
 
+  
     function setup() {
       if (window.navigator.requestMIDIAccess) {
         window.navigator.requestMIDIAccess({
@@ -154,105 +253,28 @@
       }
     }
     
+  function bassnoteOff() {
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send(P, window.performance.now());
+      
+      }
+    }
+
+    function bassnoteOn(note) {
+      bassnoteOff();
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send([0x91, note, 0x7f], window.performance.now());
+        P = ["0x81", note, "0x00"];
+
+      }
+    }
+  
   window.onload = function() {setup();}
 </script>
 
-<style>
 
- .body {margin: 0;}
-
-.navbartop {
-      overflow: hidden;
-      background-color: #333;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 8%;
-      background-color: rgba(0, 0, 0, 0.4);
-}
-
-.navbarright {
-      overflow: hidden;
-      background-color: #333;
-      position: fixed;
-      top: 8%;
-      right: 0;
-      width: 15%;
-      height: 95%;
-    }
-
-.navbarleft {
-      overflow: hidden;
-      background-color: #333;
-      position: fixed;
-      top: 8%;
-      left: 0;
-      width: 15%;
-      height: 95%;
-    }
-
-.chordbutton {
-      color: FFFFFF;
-      font-family: sans-serif;
-      font-weight: bold;
-      text-align: left;
-      text-decoration: none;
-      border: 1px solid #cccccc;
-      border-radius: 10px;
-      padding: 5px 0;
-      display: block;
-      width: 100%;
-      -webkit-touch-callout: none;
-      /* iOS Safari */
-      -webkit-user-select: none;
-      /* Safari */
-      user-select: none;
-      /* Non-prefixed version, currently supported by Chrome and Opera */
-      margin-left: 0%;
-    }
-
-
-.btn-group .button {
-  background-color: #4CAF50; /* Green */
-  border: 1px solid green;
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.btn-group .button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
-
-
-.button1 {float: left; width: 15%;}
-.PresetSelect { right; width: 15%;}
-.button3 {float: right; width: 10%;}
-.button4 {float: right; width: 10%;}
-.button5 {float: right; width: 10%;}
-.button6 {float: right; width: 10%;}
-.button7 {float: right; width: 15%;}
-
-.midframe {height: 100%;     scrolling="yes" frameborder="0" allowTransparency="true"}
-
-
-.frame {
-      overflow: hidden;
-      background-color: #33653;
-      position: fixed;
-      top: 8%;
-      left: 15%;
-      width: 70%;
-      height: 100%;
-    }
-
-
- 
-</style>
 
 </head>
 
@@ -285,22 +307,22 @@
       <button class="chordbutton" ontouchstart="noteOn(59,62,65)">Bdim</button>
       <button class="chordbutton" ontouchstart="noteOn(57,60,64)">Am</button>
       <button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
-      <button class="button" user-select=n one; onclick="FuncTranspose(1)">+Transpose1</button>
+      <button class="button" user-select=n one; onclick="FuncTranspose(1)">+Transpose2</button>
     </div>
    <div class="navbarleft">
       <button class="button" onclick="FuncTranspose(-1)">-Transpose</button>
-      <button class="chordbutton" ontouchstart="noteOn(74)">D</button>
-      <button class="chordbutton" ontouchstart="noteOn(72)">C</button>
-      <button class="chordbutton" ontouchstart="noteOn(71)">B</button>
-      <button class="chordbutton" ontouchstart="noteOn(69)">A</button>
-      <button class="chordbutton" ontouchstart="noteOn(67)">G</button>
-      <button class="chordbutton" ontouchstart="noteOn(65)">F</button>
-      <button class="chordbutton" ontouchstart="noteOn(64)">E</button>
-      <button class="chordbutton" ontouchstart="noteOn(62)">D</button>
-      <button class="chordbutton" ontouchstart="noteOn(60)">C</button>
-      <button class="chordbutton" ontouchstart="noteOn(59)">B</button>
-      <button class="chordbutton" ontouchstart="noteOn(57)">A</button>
-      <button class="chordbutton" ontouchstart="noteOn(55)">G</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(62)">D</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(60)">C</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(59)">B</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(57)">A</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(55)">G</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(53)">F</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(52)">E</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(50)">D</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(48)">C</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(47)">B</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(45)">A</button>
+      <button class="chordbutton" ontouchstart="bassnoteOn(43)">G</button>
       <button class="button" user-select=n one; onclick="FuncTranspose(1)">+Transpose</button>
     </div>
 
