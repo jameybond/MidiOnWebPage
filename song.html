@@ -244,7 +244,7 @@
         if (((a + x) == 12) || ((a + x) == -1)) {a = a + ((-(x)) * 12)};
         chord = chordtext[a + x];
        
-        var ChordTransposed = "bassbutton(" + (Number(midinote[a + x])) + ")";
+        var ChordTransposed = "bassnoteOn(" + (Number(midinote[a + x])) + ")";
         buts[i].innerHTML = chord;
         buts[i].setAttribute("ontouchstart", ChordTransposed);}
      
