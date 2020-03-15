@@ -251,13 +251,20 @@
     }
 
     
-  function panic() {
+  function panic1() {
       for (var i = 0; i < 16; i++) {
         for (var j = 0; j < 128; j+3) {
           var p = "0xB2";
           X = [p,123, "0x00"];
           Y = ["0xBA",123, "0x00"];
           noteOff();}}
+    }
+ 
+ function panic() {
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send([0xB0, 0x7B, 0x00], window.performance.now());
+      }
     }
      
 
@@ -315,7 +322,6 @@
       var iter = midiAccess.outputs.values();
       for (var o = iter.next(); !o.done; o = iter.next()) {
         o.value.send(P, window.performance.now());
-      
       }
     }
 
@@ -364,7 +370,7 @@
       <button class="chordbutton" ontouchstart="noteOn(59,62,65)">Bdim</button>
       <button class="chordbutton" ontouchstart="noteOn(57,60,64)">Am</button>
       <button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
-      <button class="button"  onclick="FuncTranspose(1)">+Transpose5</button>
+      <button class="button"  onclick="FuncTranspose(1)">+Transpose</button>
     </div>
    <div class="navbarleft">
       <button class="button" onclick="FuncTranspose(-1)">-Transpose</button>
@@ -380,7 +386,7 @@
       <button class="bassbutton" ontouchstart="bassnoteOn(47)">B</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(45)">A</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(43)">G</button>
-      <button class="button"  onclick="FuncTranspose(1)">+Transpose</button>
+      <button class="button"  onclick="FuncTranspose(1)">+Transpose1</button>
     </div>
 
 <div class="frame">
