@@ -263,7 +263,10 @@
  function panic() {
       var iter = midiAccess.outputs.values();
       for (var o = iter.next(); !o.done; o = iter.next()) {
-        o.value.send([0xB0, 0x7B, 0], window.performance.now());
+        o.value.send([0xB0, 123, 0], window.performance.now());
+        o.value.send([0xBA, 123, 0], window.performance.now());
+        o.value.send([0xB2, 123, 0], window.performance.now());
+
       }
     }
      
