@@ -238,7 +238,7 @@
         var chordcap = buts[i].innerHTML;
         chordcap = chordcap.trim();
         var chordtext = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-        var midinote = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71];
+        var midinote = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
        
         var a = chordtext.indexOf(chordcap);
         if (((a + x) == 12) || ((a + x) == -1)) {a = a + ((-(x)) * 12)};
@@ -347,7 +347,7 @@
       <button class="chordbutton" ontouchstart="noteOn(59,62,65)">Bdim</button>
       <button class="chordbutton" ontouchstart="noteOn(57,60,64)">Am</button>
       <button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
-      <button class="button"  onclick="FuncTranspose(1)">+Transpose3</button>
+      <button class="button"  onclick="FuncTranspose(1)">+Transpose4</button>
     </div>
    <div class="navbarleft">
       <button class="button" onclick="FuncTranspose(-1)">-Transpose</button>
