@@ -311,6 +311,23 @@
       }
     }
   
+  function drumnoteOff() {
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send(P, window.performance.now());
+      
+      }
+    }
+
+    function drumnoteOn(note) {
+      bassnoteOff();
+      var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send([0x99, note, 0x7f], window.performance.now());
+
+      }
+    }
+  
   window.onload = function() {setup();}
 </script>
 
@@ -326,8 +343,8 @@
       <button class="button button1" onclick="panic()">Panic</button>
       <select  PresetSelect">Preset </select>
       <button class="button button3">PullDown</button>
-      <button class="button button4">Start/Stop</button>
-      <button class="button button5">Drum3</button>
+      <button class="button ontouchstart="drumnoteOn(24) button4">Start/Stop</button>
+      <button class="button ontouchstart="drumnoteOn(25) button5">Drum3</button>
       <button class="button button6">Drum2</button>
       <button class="button button7">Drum1</button>
       </div>
