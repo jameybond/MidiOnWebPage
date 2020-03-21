@@ -2,37 +2,23 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-
 <style>
-body {
+.body {
   background: white;
-  color: #323232;
+  color: #333;
   font-weight: 300;
-  height: 100vh;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-family: Helvetica neue, roboto;
+  overflow: hidden;
+  height: 100%;
 }
-
-img {
-  width: 56px;
-  height: 48px;
-}
-
-h1 {
-  font-weight: 200;
-  font-style: 26px;
-  margin: 10px;
-}
-
-.body {margin: 0;}
 
 .navbartop {
       overflow: hidden;
-      background-color: #333;
       position: fixed;
       top: 0;
       width: 100%;
@@ -51,7 +37,7 @@ h1 {
     }
 .navbarright{
       overflow: hidden;
-      background-color: #333;
+      background-color: rgb(112, 105, 105);
       position: fixed;
       top: 8%;
       right: 0;
@@ -61,16 +47,18 @@ h1 {
 
 .navbarleft {
       overflow: hidden;
-      background-color: #333;
+      background-color: rgb(96, 86, 100);
       position: fixed;
       top: 8%;
       left: 0;
       width: 15%;
       height: 95%;
+    
     }
 
 .chordbutton {
       color: FFFFFF;
+      background-color: #4CAF50; /* Green */
       font-family: sans-serif;
       font-weight: bold;
       text-align: left;
@@ -90,9 +78,10 @@ h1 {
     }
 .bassbutton {
       color: FFFFFF;
+      background-color: #4CAF50; /* Green */
       font-family: sans-serif;
       font-weight: bold;
-      text-align: left;
+      text-align: right;
       text-decoration: none;
       border: 1px solid #cccccc;
       border-radius: 10px;
@@ -109,6 +98,7 @@ h1 {
     }
 .leadbutton {
       color: FFFFFF;
+      background-color: #4CAF50; /* Green */
       font-family: sans-serif;
       font-weight: bold;
       text-align: left;
@@ -137,6 +127,9 @@ h1 {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 .btn-group .button:not(:last-child) {
@@ -145,14 +138,16 @@ h1 {
 
 
 .button1 {float: left; width: 15%;}
-.PresetSelect { right; width: 15%;}
+.PresetSelect {float: right; width: 15%;}
 .button3 {float: right; width: 10%;}
 .button4 {float: right; width: 10%;}
 .button5 {float: right; width: 10%;}
 .button6 {float: right; width: 10%;}
 .button7 {float: right; width: 15%;}
+.transbutton { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; margin-left: 0%;}
 
-.midframe {height: 100%;     scrolling="yes" frameborder="0" allowTransparency="true"}
+
+.midframe {height: 100%; width: 100%;}
 
 
 .frame {
@@ -161,15 +156,13 @@ h1 {
       position: fixed;
       top: 8%;
       left: 15%;
-    
       height: 100%;
+      width: 65%;
     }
 
-  
+
 </style>
- 
-  
-  
+
 <script>
     var iframe = document.getElementsByTagName('iframe')[0];
     var url = iframe.src;
@@ -194,6 +187,7 @@ h1 {
 </script>
 
 <script>
+
     var midiAccess = null;
     var midiInputs = null;
     var midiOutputs = null;
@@ -397,12 +391,10 @@ h1 {
         o.value.send(Q, window.performance.now()); 
       }
     }
-  
+    
 window.onload = function() {setup();}
 </script>
-
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 
 
@@ -420,43 +412,8 @@ window.onload = function() {setup();}
       </div>
    </div>
 
-    <div class="navbarright">
-      <button class="button" onclick="FuncTranspose(-1)">-Trans</button>
-      <button class="chordbutton" ontouchstart="noteOn(74,77,81)">Dm</button>
-      <button class="chordbutton" ontouchstart="noteOn(72,76,79)">C</button>
-      <button class="chordbutton" ontouchstart="noteOn(71,74,77)">Bdim</button>
-      <button class="chordbutton" ontouchstart="noteOn(69,72,76)">Am</button>
-      <button class="chordbutton" ontouchstart="noteOn(67,71,74)">G</button>
-      <button class="chordbutton" ontouchstart="noteOn(65,69,72)">F</button>
-      <button class="chordbutton" ontouchstart="noteOn(64,67,71)">Em</button>
-      <button class="chordbutton" ontouchstart="noteOn(62,65,69)">Dm</button>
-      <button class="chordbutton" ontouchstart="noteOn(60,64,67)">C</button>
-      <button class="chordbutton" ontouchstart="noteOn(59,62,65)">Bdim</button>
-      <button class="chordbutton" ontouchstart="noteOn(57,60,64)">Am</button>
-      <button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
-      <button class="button"  onclick="FuncTranspose(1)">+Transpose</button>
-    </div>
-<div class="navbarrightlead">
-      <button class="button" onclick="FuncTranspose(-1)">-Trans</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(74)">D</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(72)">C</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(71)">B</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(69)">A</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(67)">G</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(65)">F</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(64)">E</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(62)">D</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(60)">C</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(59)">B</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(57)">A</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(55)">G</button>
-      <button class="button"  onclick="FuncTranspose(1)">+Transpose</button>
-    </div>
-
-
-
    <div class="navbarleft">
-      <button class="button" onclick="FuncTranspose(-1)">-Transpose</button>
+      <button class="transbutton" onclick="FuncTranspose(-1)">-Transp</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(62)" ontouchend="bassnoteOff(62)">D</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(60)" ontouchend="bassnoteOff(60)">C</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(59)" ontouchend="bassnoteOff(59)">B</button>
@@ -469,8 +426,40 @@ window.onload = function() {setup();}
       <button class="bassbutton" ontouchstart="bassnoteOn(47)" ontouchend="bassnoteOff(47)">B</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(45)" ontouchend="bassnoteOff(45)">A</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(43)" ontouchend="bassnoteOff(43)">G</button>
-      <button class="button"  onclick="FuncTranspose(1)">+Transpose3</button>
     </div>
+
+    <div class="navbarrightlead">
+      <button class="transbutton"  onclick="FuncTranspose(1)">+Transp</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(74)">D</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(72)">C</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(71)">B</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(69)">A</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(67)">G</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(65)">F</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(64)">E</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(62)">D</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(60)">C</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(59)">B</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(57)">A</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(55)">G</button>
+    </div>
+
+    <div class="navbarright">
+      <button class="transbutton"  onclick="FuncTranspose(1)">+Transp</button>
+      <button class="chordbutton" ontouchstart="noteOn(74,77,81)">Dm</button>
+      <button class="chordbutton" ontouchstart="noteOn(72,76,79)">C</button>
+      <button class="chordbutton" ontouchstart="noteOn(71,74,77)">Bdim</button>
+      <button class="chordbutton" ontouchstart="noteOn(69,72,76)">Am</button>
+      <button class="chordbutton" ontouchstart="noteOn(67,71,74)">G</button>
+      <button class="chordbutton" ontouchstart="noteOn(65,69,72)">F</button>
+      <button class="chordbutton" ontouchstart="noteOn(64,67,71)">Em</button>
+      <button class="chordbutton" ontouchstart="noteOn(62,65,69)">Dm</button>
+      <button class="chordbutton" ontouchstart="noteOn(60,64,67)">C</button>
+      <button class="chordbutton" ontouchstart="noteOn(59,62,65)">Bdim</button>
+      <button class="chordbutton" ontouchstart="noteOn(57,60,64)">Am</button>
+      <button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
+    </div>
+
 
 <div class="frame">
 <iframe class="midframe" src="https://www.google.com/search?igu=1" ></iframe>
