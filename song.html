@@ -187,7 +187,6 @@
 </script>
 
 <script>
-
     var midiAccess = null;
     var midiInputs = null;
     var midiOutputs = null;
@@ -207,6 +206,7 @@
     var Z1 = [0,0,0];
     var P = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent for Bass Notes
     var Q = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent for lead Notes
+    var R = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent for Drum Note
   
 
   
@@ -242,22 +242,21 @@
       }
 
     function FuncTranspose(x) {
-      var buts = document.getElementsByClassName("chordbutton");
-      for (var i = 0; i < buts.length; i++) {
+      var chordtext = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+      var midinote = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71];
+      var chordtype = ["m", "dim", "sus"]
+      var chordnot2 = [-1, -1, 1]
+      var chordnot3 = [0, -1, 7]
+      { var buts = document.getElementsByClassName("chordbutton");
+        for (var i = 0; i < buts.length; i++) {
         var chordcap = buts[i].innerHTML;
         chordcap = chordcap.trim();
         var chordary = chordcap.split("");
-        var chordarylen = chordary.length;
         chord = chordary[0];
         chordsuf = chordcap.slice(1);
         if ((chordary[1] == "#") || (chordary[1] == "b")) {
           var chord = chord + chordary[1];
           var chordsuf = chordcap.slice(2)};
-        var chordtext = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-        var midinote = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71];
-        var chordtype = ["m", "dim", "sus"]
-        var chordnot2 = [-1, -1, 1]
-        var chordnot3 = [0, -1, 7]
         var a = chordtext.indexOf(chord);
         if (((a + x) == 12) || ((a + x) == -1)) {
           a = a + ((-(x)) * 12)};
@@ -267,46 +266,59 @@
           var d = 0} else {
           var c = chordnot2[chordtype.indexOf(chordsuf)];
           var d = chordnot3[chordtype.indexOf(chordsuf)]};
-        var ChordTransposed = "noteOn(" + (Number(midinote[a + x])) + "," + (Number(midinote[a + x]) + 4 + c) + "," + (Number(midinote[a + x]) + 7 + d) + ")";
+        
+        var noteval =buts[i].getAttribute("ontouchstart"); 
+        noteval = noteval.split("(")[1] ; 
+        noteval = noteval.split(")")[0];  
+        noteval = noteval.split(",");
+
+        var ChordTransposed = "noteOn("+(Number(noteval[0])+x)+","+(Number(noteval[1])+x)+","+(Number(noteval[2])+x)+")";
         buts[i].innerHTML = chord + chordsuf;
         buts[i].setAttribute("ontouchstart", ChordTransposed);}
-     
-     
-        var buts = document.getElementsByClassName("bassbutton");
+      }
+
+      { var buts = document.getElementsByClassName("bassbutton");
         for (var i = 0; i < buts.length; i++) {
         var chordcap = buts[i].innerHTML;
         chordcap = chordcap.trim();
         var a = chordtext.indexOf(chordcap);
         if (((a + x) == 12) || ((a + x) == -1)) {a = a + ((-(x)) * 12)};
         chord = chordtext[a + x];
-       
-        var ChordTransposed = "bassnoteOn(" + (Number(midinote[a + x])) + ")";
+        var noteval = buts[i].getAttribute("ontouchstart"); noteval = noteval.split("(")[1] ; noteval = noteval.split(")")[0];
+
+        var ChordTransposed = "bassnoteOn("+(Number(noteval)+x)+")";
         buts[i].innerHTML = chord;
-        buts[i].setAttribute("ontouchstart", ChordTransposed);}
-        
-        
-        var buts = document.getElementsByClassName("leadbutton");
+        buts[i].setAttribute("ontouchstart", ("bassnoteOn("+(Number(noteval)+x)+")"));
+        buts[i].setAttribute("ontouchend", ("bassnoteOff("+(Number(noteval)+x)+")"));}
+      }  
+
+      { var buts = document.getElementsByClassName("leadbutton");
         for (var i = 0; i < buts.length; i++) {
         var chordcap = buts[i].innerHTML;
         chordcap = chordcap.trim();
         var a = chordtext.indexOf(chordcap);
         if (((a + x) == 12) || ((a + x) == -1)) {a = a + ((-(x)) * 12)};
         chord = chordtext[a + x];
-       
-        var ChordTransposed = "leadnoteOn(" + (Number(midinote[a + x])) + ")";
+        var noteval = buts[i].getAttribute("ontouchstart"); noteval = noteval.split("(")[1] ; noteval = noteval.split(")")[0];
+
+        var ChordTransposed = "leadnoteOn(" + (Number(noteval)+x) + ")";
         buts[i].innerHTML = chord;
-        buts[i].setAttribute("ontouchstart", ChordTransposed);}
-        
+        buts[i].setAttribute("ontouchstart", ("leadnoteOn(" + (Number(noteval)+x) + ")") );
+        buts[i].setAttribute("ontouchend", ("leadnoteOff(" + (Number(noteval)+x) + ")") );}
+      }  
     }
 
     
   function panic() {
-      for (var i = 0; i < 16; i++) {
+      /*for (var i = 0; i < 16; i++) {
         for (var j = 0; j < 128; j+3) {
           var p = "0xB2";
           X = [p,123, "0x00"];
           Y = ["0xBA",123, "0x00"];
-          noteOff();}}
+          noteOff();}} */
+      noteOff()
+      bassnoteOff();
+      drumnoteOff();
     }
  
      
@@ -364,7 +376,7 @@
   function drumnoteOff() {
       var iter = midiAccess.outputs.values();
       for (var o = iter.next(); !o.done; o = iter.next()) {
-        o.value.send(P, window.performance.now());
+        o.value.send(R, window.performance.now());
       }
     }
 
@@ -372,7 +384,7 @@
       var iter = midiAccess.outputs.values();
       for (var o = iter.next(); !o.done; o = iter.next()) {
         o.value.send([0x99, note, 0x7f], window.performance.now());
-
+        R = ["0x89", note, "0x00"];
       }
     }
 
