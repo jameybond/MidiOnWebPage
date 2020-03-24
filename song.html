@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 <style>
-.body {
+    .body {
   background: white;
   color: #333;
   font-weight: 300;
@@ -145,7 +145,7 @@
 .button6 {float: right; width: 10%;}
 .button7 {float: right; width: 15%;}
 .transbutton { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; margin-left: 0%;}
-
+.minor{background-color: rgb(192, 238, 193);}
 
 .midframe {height: 100%; width: 100%;}
 
@@ -161,6 +161,12 @@
     }
 
 
+.Preset{
+      overflow: hidden;
+      position: fixed;
+      top: 2%;
+      width: 20%;
+    }
 </style>
 
 <script>
@@ -187,7 +193,7 @@
 </script>
 
 <script>
-    var midiAccess = null;
+     var midiAccess = null;
     var midiInputs = null;
     var midiOutputs = null;
     var C = 60; // note on, middle C, full velocity
@@ -394,7 +400,6 @@
       for (var o = iter.next(); !o.done; o = iter.next()) {
         o.value.send([0x94, note, 0x7f], window.performance.now());
         Q = ["0x84", note, "0x00"];
-
       }
     }
   function leadnoteOff() {
@@ -403,8 +408,19 @@
         o.value.send(Q, window.performance.now()); 
       }
     }
-    
-window.onload = function() {setup();}
+  
+  function Funcpresetchange() {
+    var x = document.getElementById("Preset").value;
+    var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send([0xC1, x], window.performance.now());
+      }
+  }
+   
+  
+ 
+ 
+    window.onload = function() {setup();}
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
@@ -415,7 +431,21 @@ window.onload = function() {setup();}
     <div class="navbartop"> 
       <div class="btn-group">
       <button class="button button1" onclick="panic()">Panic</button>
-      <select  PresetSelect">Preset </select>
+     
+        <select id="Preset" onchange="Funcpresetchange()" class="Preset">
+          <option value=0>Preset1</option>
+          <option value=1>Preset2</option>
+          <option value=2>Preset3</option>
+          <option value=3>Preset4</option>
+          <option value=4>Preset5</option>
+          <option value=5>Preset6</option>
+          <option value=6>Preset7</option>
+          <option value=7>Preset8</option>
+          <option value=8>Preset9</option>
+          <option value=9>Preset10</option>
+          <option value=10>Preset11</option>
+        </select>
+     
       <button class="button button3">PullDown</button>
       <button class="button button4" ontouchstart="drumnoteOn(24)">Start/Stop</button>
       <button class="button button5" ontouchstart="drumnoteOn(25)">Drum3</button>
@@ -426,49 +456,49 @@ window.onload = function() {setup();}
 
    <div class="navbarleft">
       <button class="transbutton" onclick="FuncTranspose(-1)">-Transp</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(62)" ontouchend="bassnoteOff(62)">D</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(62)" ontouchend="bassnoteOff(62)">D</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(60)" ontouchend="bassnoteOff(60)">C</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(59)" ontouchend="bassnoteOff(59)">B</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(57)" ontouchend="bassnoteOff(57)">A</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(59)" ontouchend="bassnoteOff(59)">B</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(57)" ontouchend="bassnoteOff(57)">A</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(55)" ontouchend="bassnoteOff(55)">G</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(53)" ontouchend="bassnoteOff(53)">F</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(52)" ontouchend="bassnoteOff(52)">E</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(50)" ontouchend="bassnoteOff(50)">D</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(52)" ontouchend="bassnoteOff(52)">E</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(50)" ontouchend="bassnoteOff(50)">D</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(48)" ontouchend="bassnoteOff(48)">C</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(47)" ontouchend="bassnoteOff(47)">B</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(45)" ontouchend="bassnoteOff(45)">A</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(47)" ontouchend="bassnoteOff(47)">B</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(45)" ontouchend="bassnoteOff(45)">A</button>
       <button class="bassbutton" ontouchstart="bassnoteOn(43)" ontouchend="bassnoteOff(43)">G</button>
     </div>
 
     <div class="navbarrightlead">
       <button class="transbutton"  onclick="FuncTranspose(1)">+Transp</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(74)">D</button>
+      <button class="leadbutton minor" ontouchstart="leadnoteOn(74)">D</button>
       <button class="leadbutton" ontouchstart="leadnoteOn(72)">C</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(71)">B</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(69)">A</button>
+      <button class="leadbutton minor" ontouchstart="leadnoteOn(71)">B</button>
+      <button class="leadbutton minor" ontouchstart="leadnoteOn(69)">A</button>
       <button class="leadbutton" ontouchstart="leadnoteOn(67)">G</button>
       <button class="leadbutton" ontouchstart="leadnoteOn(65)">F</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(64)">E</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(62)">D</button>
+      <button class="leadbutton minor" ontouchstart="leadnoteOn(64)">E</button>
+      <button class="leadbutton minor" ontouchstart="leadnoteOn(62)">D</button>
       <button class="leadbutton" ontouchstart="leadnoteOn(60)">C</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(59)">B</button>
-      <button class="leadbutton" ontouchstart="leadnoteOn(57)">A</button>
+      <button class="leadbutton minor" ontouchstart="leadnoteOn(59)">B</button>
+      <button class="leadbutton minor" ontouchstart="leadnoteOn(57)">A</button>
       <button class="leadbutton" ontouchstart="leadnoteOn(55)">G</button>
     </div>
 
     <div class="navbarright">
       <button class="transbutton"  onclick="FuncTranspose(1)">+Transp</button>
-      <button class="chordbutton" ontouchstart="noteOn(74,77,81)">Dm</button>
+      <button class="chordbutton minor" ontouchstart="noteOn(74,77,81)">Dm</button>
       <button class="chordbutton" ontouchstart="noteOn(72,76,79)">C</button>
-      <button class="chordbutton" ontouchstart="noteOn(71,74,77)">Bdim</button>
-      <button class="chordbutton" ontouchstart="noteOn(69,72,76)">Am</button>
+      <button class="chordbutton minor" ontouchstart="noteOn(71,74,77)">Bdim</button>
+      <button class="chordbutton minor" ontouchstart="noteOn(69,72,76)">Am</button>
       <button class="chordbutton" ontouchstart="noteOn(67,71,74)">G</button>
       <button class="chordbutton" ontouchstart="noteOn(65,69,72)">F</button>
-      <button class="chordbutton" ontouchstart="noteOn(64,67,71)">Em</button>
-      <button class="chordbutton" ontouchstart="noteOn(62,65,69)">Dm</button>
+      <button class="chordbutton minor" ontouchstart="noteOn(64,67,71)">Em</button>
+      <button class="chordbutton minor" ontouchstart="noteOn(62,65,69)">Dm</button>
       <button class="chordbutton" ontouchstart="noteOn(60,64,67)">C</button>
-      <button class="chordbutton" ontouchstart="noteOn(59,62,65)">Bdim</button>
-      <button class="chordbutton" ontouchstart="noteOn(57,60,64)">Am</button>
+      <button class="chordbutton minor" ontouchstart="noteOn(59,62,65)">Bdim</button>
+      <button class="chordbutton minor" ontouchstart="noteOn(57,60,64)">Am</button>
       <button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
     </div>
 
