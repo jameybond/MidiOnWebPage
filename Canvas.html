@@ -1,0 +1,818 @@
+<HTML>
+
+<HEAD>
+  <TITLE>The Canvas Tag - Touch</TITLE>
+
+<style>
+.body {
+  background: white;
+  color: #333;
+  font-weight: 300;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: Helvetica neue, roboto;
+  overflow: hidden;
+  height: 100%;
+}
+
+.navbartop {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 8%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.myCanvas {
+  overflow: hidden;
+  background-color: no;
+  position: fixed;
+  top: 8%;
+  right: 10%;
+  width: 10%;
+  height: 80%;
+}
+
+.navbarrightlead {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 8%;
+  right: 10%;
+  width: 10%;
+  height: 95%;
+}
+.navbarright {
+  overflow: hidden;
+  background-color: rgb(112, 105, 105);
+  position: fixed;
+  top: 8%;
+  right: 0;
+  width: 10%;
+  height: 95%;
+}
+
+.navbarleft {
+  overflow: hidden;
+  background-color: rgb(96, 86, 100);
+  position: fixed;
+  top: 8%;
+  left: 0;
+  width: 15%;
+  height: 95%;
+}
+
+.chordbutton {
+  color: FFFFFF;
+  background-color: #4caf50; /* Green */
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 5px 0;
+  display: block;
+  width: 100%;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
+  margin-left: 0%;
+}
+.bassbutton {
+  color: FFFFFF;
+  background-color: #4caf50; /* Green */
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: right;
+  text-decoration: none;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 5px 0;
+  display: block;
+  width: 100%;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
+  margin-left: 0%;
+}
+.leadbutton {
+  color: FFFFFF;
+  background-color: #4caf50; /* Green */
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  padding: 5px 0;
+  display: block;
+  width: 100%;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */
+  margin-left: 0%;
+}
+
+.btn-group .button {
+  background-color: #4caf50; /* Green */
+  border: 1px solid green;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.btn-group .button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+.button1 {
+  float: left;
+  width: 15%;
+}
+.PresetSelect {
+  float: right;
+  width: 15%;
+}
+.button3 {
+  float: right;
+  width: 10%;
+}
+.button4 {
+  float: right;
+  width: 10%;
+}
+.button5 {
+  float: right;
+  width: 10%;
+}
+.button6 {
+  float: right;
+  width: 10%;
+}
+.button7 {
+  float: right;
+  width: 15%;
+}
+.transbutton {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-left: 0%;
+}
+.minor {
+  background-color: rgb(192, 238, 193);
+}
+
+.midframe {
+  height: 100%;
+  width: 100%;
+}
+
+.frame {
+  overflow: hidden;
+  background-color: #33653;
+  position: fixed;
+  top: 8%;
+  left: 15%;
+  height: 100%;
+  width: 65%;
+}
+
+.Preset {
+  overflow: hidden;
+  position: fixed;
+  top: 2%;
+  width: 20%;
+}
+
+</style>
+
+<script>
+//Canvas Page Script Start
+var elem = document.getElementById("myCanvas"),
+  elemLeft = elem.offsetLeft,
+  elemTop = elem.offsetTop,
+  context = elem.getContext("2d"),
+  elements = [];
+
+butX = 0;
+butH = 10;
+butW = 270;
+
+but1Y = 0;
+but2Y = but1Y + butH + 1;
+but3Y = but2Y + butH + 1;
+but4Y = but3Y + butH + 1;
+but5Y = but4Y + butH + 1;
+but6Y = but5Y + butH + 1;
+but7Y = but6Y + butH + 1;
+but8Y = but7Y + butH + 1;
+but9Y = but8Y + butH + 1;
+but10Y = but9Y + butH + 1;
+but11Y = but10Y + butH + 1;
+
+context.strokeStyle = "white";
+context.fillStyle = "green";
+//context.rect(but1X, but1Y, but1W, but1H);
+context.stroke();
+context.fill();
+
+// Add event listener for `click` events.
+elem.addEventListener(
+  "touchstart",
+  function (event) {
+    var x = event.pageX - elemLeft,
+      y = event.pageY - elemTop;
+    console.log(x, y);
+    elements.forEach(function (element) {
+      if (y > but1Y && y < but1Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "1 Button X=" + x + "Y=" + y;
+      }
+      if (y > but2Y && y < but2Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "2 Button X=" + x + "Y=" + y;
+      }
+      if (y > but3Y && y < but3Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "3 Button X=" + x + "Y=" + y;
+      }
+      if (y > but4Y && y < but4Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "4 Button X=" + x + "Y=" + y;
+      }
+      if (y > but5Y && y < but5Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "5 Button X=" + x + "Y=" + y;
+      }
+      if (y > but6Y && y < but6Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "6 Button X=" + x + "Y=" + y;
+      }
+      if (y > but7Y && y < but7Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "7 Button X=" + x + "Y=" + y;
+      }
+      if (y > but8Y && y < but8Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "8 Button X=" + x + "Y=" + y;
+      }
+      if (y > but9Y && y < but9Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "9 Button X=" + x + "Y=" + y;
+      }
+      if (y > but10Y && y < but10Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "10 Button X=" + x + "Y=" + y;
+      }
+    });
+  },
+  false
+);
+
+elem.addEventListener(
+  "touchmove",
+  function (event) {
+    var x = event.pageX - elemLeft,
+      y = event.pageY - elemTop;
+    console.log(x, y);
+    elements.forEach(function (element) {
+      //if (y > but1Y && y < but1Y + butH && x > butX && x < butX + butW) {document.getElementById("demo").innerHTML ="1 Button X=" + x + "Y=" + y;}
+      if (y > but1Y && y < but1Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "1 Button X=" + x + "Y=" + y;
+      }
+      if (y > but2Y && y < but2Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "2 Button X=" + x + "Y=" + y;
+      }
+      if (y > but3Y && y < but3Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "3 Button X=" + x + "Y=" + y;
+      }
+      if (y > but4Y && y < but4Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "4 Button X=" + x + "Y=" + y;
+      }
+      if (y > but5Y && y < but5Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "5 Button X=" + x + "Y=" + y;
+      }
+      if (y > but6Y && y < but6Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "6 Button X=" + x + "Y=" + y;
+      }
+      if (y > but7Y && y < but7Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "7 Button X=" + x + "Y=" + y;
+      }
+      if (y > but8Y && y < but8Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "8 Button X=" + x + "Y=" + y;
+      }
+      if (y > but9Y && y < but9Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "9 Button X=" + x + "Y=" + y;
+      }
+      if (y > but10Y && y < but10Y + butH && x > butX && x < butX + butW) {
+        document.getElementById("demo").innerHTML =
+          "10 Button X=" + x + "Y=" + y;
+      }
+    });
+  },
+  false
+);
+
+elem.addEventListener(
+  "touchend",
+  function (event) {
+    document.getElementById("demo").innerHTML = "";
+  },
+  false
+);
+
+elem.addEventListener(
+  "touchcancel",
+  function (event) {
+    document.getElementById("demo").innerHTML = "";
+  },
+  false
+);
+
+//match size of screen to the canvas
+addEventListener("resize", () => {
+  elem.width = innerWidth;
+  elem.height = innerHeight;
+});
+
+// Add element.
+/* 
+elements.push({
+  colour: "#05EFFF",
+  width: 200,
+  height: 100,
+  top: 20,
+  left: 15
+});
+*/
+//elements.push({colour: "#05EFFF",width: butW, height: butH,top: but1Y,left: butX});
+
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but1Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but2Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but3Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but4Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but5Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but6Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but7Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but8Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but9Y,
+  left: butX
+});
+elements.push({
+  colour: "#05EFFF",
+  width: butW,
+  height: butH,
+  top: but10Y,
+  left: butX
+});
+
+// Render elements.
+elements.forEach(function (element) {
+  context.fillStyle = element.colour;
+  context.fillRect(element.left, element.top, element.width, element.height);
+});
+
+//to disable scrolling on canvas
+document.body.addEventListener(
+  "touchstart",
+  function (e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  },
+  false
+);
+document.body.addEventListener(
+  "touchend",
+  function (e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  },
+  false
+);
+document.body.addEventListener(
+  "touchmove",
+  function (e) {
+    if (e.target == canvas) {
+      e.preventDefault();
+    }
+  },
+  false
+);
+
+//Canvas Page Script Start
+
+//GOOGLE Page Script Start
+
+var iframe = document.getElementsByTagName("iframe")[0];
+var url = iframe.src;
+var getData = function (data) {
+  if (
+    data &&
+    data.query &&
+    data.query.results &&
+    data.query.results.resources &&
+    data.query.results.resources.content &&
+    data.query.results.resources.status == 200
+  )
+    loadHTML(data.query.results.resources.content);
+  else if (data && data.error && data.error.description)
+    loadHTML(data.error.description);
+  else loadHTML("Error: Cannot load " + url);
+};
+var loadURL = function (src) {
+  url = src;
+  var script = document.createElement("script");
+  script.src =
+    "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20data.headers%20where%20url%3D%22" +
+    encodeURIComponent(url) +
+    "%22&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=getData";
+  document.body.appendChild(script);
+};
+var loadHTML = function (html) {
+  iframe.src = "about:blank";
+  iframe.contentWindow.document.open();
+  iframe.contentWindow.document.write(
+    html.replace(
+      /<head>/i,
+      '<head><base href="' +
+        url +
+        '"><scr' +
+        'ipt>document.addEventListener("click", function(e) { if(e.target && e.target.nodeName == "A") { e.preventDefault(); parent.loadURL(e.target.href); } });</scr' +
+        "ipt>"
+    )
+  );
+  iframe.contentWindow.document.close();
+};
+loadURL(iframe.src);
+//GOOGLE Page Script END
+
+//MIDI Programming starting
+
+var midiAccess = null;
+var midiInputs = null;
+var midiOutputs = null;
+var C = 60; // note on, middle C, full velocity
+var D = 62; // note on, middle D, full velocity
+var E = 64; // note on, middle E, full velocity
+var F = 65; // note on, middle F, full velocity
+var G = 67; // note on, middle F, full velocity
+var A = 69; // note on, middle F, full velocity
+var B = 71; // note on, middle F, full velocity
+var m = -1; // middle note on the chord number
+var X = [0, 0, 0]; // to capture note on value that was has been sent so a corresponding note off can be sent
+var Y = [0, 0, 0];
+var Z = [0, 0, 0];
+var X1 = [0, 0, 0]; // to capture note on value that was has been sent so a corresponding note off can be sent
+var Y1 = [0, 0, 0];
+var Z1 = [0, 0, 0];
+var P = [0, 0, 0]; // to capture note on value that was has been sent so a corresponding note off can be sent for Bass Notes
+var Q = [0, 0, 0]; // to capture note on value that was has been sent so a corresponding note off can be sent for lead Notes
+var R = [0, 0, 0]; // to capture note on value that was has been sent so a corresponding note off can be sent for Drum Note
+
+function setup() {
+  if (window.navigator.requestMIDIAccess) {
+    window.navigator
+      .requestMIDIAccess({
+        sysex: false
+      })
+      .then(success);
+  }
+
+  function setupEventHandler() {
+    var inputs = [];
+    var iter = midiAccess.inputs.values();
+    for (var o = iter.next(); !o.done; o = iter.next()) {
+      inputs.push(o.value);
+    }
+    var outputs = [];
+    var iter = midiAccess.outputs.values();
+    for (var o = iter.next(); !o.done; o = iter.next()) {
+      outputs.push(o.value);
+    }
+    midiInputs = inputs;
+    midiOutputs = outputs;
+  }
+
+  function success(access) {
+    midiAccess = access;
+    midiAccess.onstatechange = function (event) {
+      var port = event.port;
+    };
+    setupEventHandler();
+  }
+}
+
+function FuncTranspose(x) {
+  var chordtext = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B"
+  ];
+  var midinote = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71];
+  var chordtype = ["m", "dim", "sus"];
+  var chordnot2 = [-1, -1, 1];
+  var chordnot3 = [0, -1, 7];
+  {
+    var buts = document.getElementsByClassName("chordbutton");
+    for (var i = 0; i < buts.length; i++) {
+      var chordcap = buts[i].innerHTML;
+      chordcap = chordcap.trim();
+      var chordary = chordcap.split("");
+      chord = chordary[0];
+      chordsuf = chordcap.slice(1);
+      if (chordary[1] == "#" || chordary[1] == "b") {
+        var chord = chord + chordary[1];
+        var chordsuf = chordcap.slice(2);
+      }
+      var a = chordtext.indexOf(chord);
+      if (a + x == 12 || a + x == -1) {
+        a = a + -x * 12;
+      }
+      chord = chordtext[a + x];
+      if (chordsuf == "") {
+        var c = 0;
+        var d = 0;
+      } else {
+        var c = chordnot2[chordtype.indexOf(chordsuf)];
+        var d = chordnot3[chordtype.indexOf(chordsuf)];
+      }
+
+      var noteval = buts[i].getAttribute("ontouchstart");
+      noteval = noteval.split("(")[1];
+      noteval = noteval.split(")")[0];
+      noteval = noteval.split(",");
+
+      var ChordTransposed =
+        "noteOn(" +
+        (Number(noteval[0]) + x) +
+        "," +
+        (Number(noteval[1]) + x) +
+        "," +
+        (Number(noteval[2]) + x) +
+        ")";
+      buts[i].innerHTML = chord + chordsuf;
+      buts[i].setAttribute("ontouchstart", ChordTransposed);
+    }
+  }
+
+  {
+    var buts = document.getElementsByClassName("bassbutton");
+    for (var i = 0; i < buts.length; i++) {
+      var chordcap = buts[i].innerHTML;
+      chordcap = chordcap.trim();
+      var a = chordtext.indexOf(chordcap);
+      if (a + x == 12 || a + x == -1) {
+        a = a + -x * 12;
+      }
+      chord = chordtext[a + x];
+      var noteval = buts[i].getAttribute("ontouchstart");
+      noteval = noteval.split("(")[1];
+      noteval = noteval.split(")")[0];
+
+      var ChordTransposed = "bassnoteOn(" + (Number(noteval) + x) + ")";
+      buts[i].innerHTML = chord;
+      buts[i].setAttribute(
+        "ontouchstart",
+        "bassnoteOn(" + (Number(noteval) + x) + ")"
+      );
+      buts[i].setAttribute(
+        "ontouchend",
+        "bassnoteOff(" + (Number(noteval) + x) + ")"
+      );
+    }
+  }
+
+  {
+    var buts = document.getElementsByClassName("leadbutton");
+    for (var i = 0; i < buts.length; i++) {
+      var chordcap = buts[i].innerHTML;
+      chordcap = chordcap.trim();
+      var a = chordtext.indexOf(chordcap);
+      if (a + x == 12 || a + x == -1) {
+        a = a + -x * 12;
+      }
+      chord = chordtext[a + x];
+      var noteval = buts[i].getAttribute("ontouchstart");
+      noteval = noteval.split("(")[1];
+      noteval = noteval.split(")")[0];
+
+      var ChordTransposed = "leadnoteOn(" + (Number(noteval) + x) + ")";
+      buts[i].innerHTML = chord;
+      buts[i].setAttribute(
+        "ontouchstart",
+        "leadnoteOn(" + (Number(noteval) + x) + ")"
+      );
+      buts[i].setAttribute(
+        "ontouchend",
+        "leadnoteOff(" + (Number(noteval) + x) + ")"
+      );
+    }
+  }
+}
+
+function panic() {
+  /*for (var i = 0; i < 16; i++) {
+        for (var j = 0; j < 128; j+3) {
+          var p = "0xB2";
+          X = [p,123, "0x00"];
+          Y = ["0xBA",123, "0x00"];
+          noteOff();}} */
+  noteOff();
+  bassnoteOff();
+  drumnoteOff();
+}
+
+function noteOff() {
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send(X, window.performance.now());
+    o.value.send(Y, window.performance.now());
+    o.value.send(Z, window.performance.now());
+    o.value.send(X1, window.performance.now());
+    o.value.send(Y1, window.performance.now());
+    o.value.send(Z1, window.performance.now());
+  }
+}
+
+function noteOn(note, suf, thd) {
+  noteOff();
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send([0x92, note, 0x7f], window.performance.now());
+    o.value.send([0x92, suf, 0x7f], window.performance.now());
+    o.value.send([0x92, thd, 0x7f], window.performance.now());
+    o.value.send([0x93, note, 0x7f], window.performance.now());
+    o.value.send([0x93, suf, 0x7f], window.performance.now());
+    o.value.send([0x93, thd, 0x7f], window.performance.now());
+    X = ["0x82", note, "0x00"];
+    Y = ["0x82", suf, "0x00"];
+    Z = ["0x82", thd, "0x00"];
+    X1 = ["0x83", note, "0x00"];
+    Y1 = ["0x83", suf, "0x00"];
+    Z1 = ["0x83", thd, "0x00"];
+  }
+}
+
+function bassnoteOff() {
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send(P, window.performance.now());
+  }
+}
+
+function bassnoteOn(note) {
+  bassnoteOff();
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send([0x91, note, 0x7f], window.performance.now());
+    P = ["0x81", note, "0x00"];
+  }
+}
+
+function drumnoteOff() {
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send(R, window.performance.now());
+  }
+}
+
+function drumnoteOn(note) {
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send([0x99, note, 0x7f], window.performance.now());
+    R = ["0x89", note, "0x00"];
+  }
+}
+
+function leadnoteOn(note) {
+  leadnoteOff();
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send([0x94, note, 0x7f], window.performance.now());
+    Q = ["0x84", note, "0x00"];
+  }
+}
+function leadnoteOff() {
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send(Q, window.performance.now());
+  }
+}
+
+function Funcpresetchange() {
+  var x = document.getElementById("Preset").value;
+  var iter = midiAccess.outputs.values();
+  for (var o = iter.next(); !o.done; o = iter.next()) {
+    o.value.send([0xc1, x], window.performance.now());
+  }
+}
+
+window.onload = function () {
+  setup();
+};
+
+//MIDI Programming END
+
+
+</script>
+
+</HEAD>
+
+<BODY onLoad=initialise()><CANVAS class="myCanvas" Id="myCanvas" style="border:1px solid #000000;"> Canvas tag not supported</CANVAS>
+  <p id="demo"> Coordinates</p>
+</BODY>
+
+</HTML>
