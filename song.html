@@ -37,7 +37,7 @@
     }
 .navbarright{
       overflow: hidden;
-      background-color: rgb(96, 86, 100);
+      background-color: rgb(112, 105, 105);
       position: fixed;
       top: 8%;
       right: 0;
@@ -58,7 +58,7 @@
 
 .chordbutton {
       color: FFFFFF;
-      background-color: #1F8276; /* Green */
+      background-color: #4CAF50; /* Green */
       font-family: sans-serif;
       font-weight: bold;
       text-align: left;
@@ -78,7 +78,7 @@
     }
 .bassbutton {
       color: FFFFFF;
-      background-color: #1F8276; /* Green */
+      background-color: #4CAF50; /* Green */
       font-family: sans-serif;
       font-weight: bold;
       text-align: right;
@@ -98,7 +98,7 @@
     }
 .leadbutton {
       color: FFFFFF;
-      background-color: #1F8276; /* Green */
+      background-color: #4CAF50; /* Green */
       font-family: sans-serif;
       font-weight: bold;
       text-align: left;
@@ -118,7 +118,7 @@
     }
 
 .btn-group .button {
-  background-color: 03919B; /* Green */
+  background-color: #4CAF50; /* Green */
   border: 1px solid green;
   color: white;
   padding: 10px 10px;
@@ -138,16 +138,14 @@
 
 
 .button1 {float: left; width: 15%;}
-.plus{float: left; top:2%; width:5%; }  
-.Preset{float: left; top: 2%; height:57%;}  
-.minus{float: left; top:2%; width:5%; }
+.PresetSelect {float: right; width: 15%;}
 .button3 {float: right; width: 10%;}
 .button4 {float: right; width: 10%;}
 .button5 {float: right; width: 10%;}
 .button6 {float: right; width: 10%;}
 .button7 {float: right; width: 15%;}
 .transbutton { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; margin-left: 0%;}
-.minor{background-color: 40BAA4;}
+.minor{background-color: rgb(192, 238, 193);}
 
 .midframe {height: 100%; width: 100%;}
 
@@ -163,7 +161,12 @@
     }
 
 
-
+.Preset{
+      overflow: hidden;
+      position: fixed;
+      top: 2%;
+      width: 20%;
+    }
 </style>
 
 <script>
@@ -414,14 +417,7 @@
       }
   }
    
-  function presetchange(val) {
-    var preset = document.getElementById("Preset");
-    x=preset.value;
-    x = Number(x) +(val);
-    preset.value=x;
-       
-      }
-  }
+  
  
  
     window.onload = function() {setup();}
@@ -435,10 +431,7 @@
     <div class="navbartop"> 
       <div class="btn-group">
       <button class="button button1" onclick="panic()">Panic</button>
-        
-        
-        
-       <button class="button plus" onclick="presetchange(1)">+</button>
+     
         <select id="Preset" onchange="Funcpresetchange()" class="Preset">
           <option value=0>Preset1</option>
           <option value=1>Preset2</option>
@@ -451,18 +444,7 @@
           <option value=8>Preset9</option>
           <option value=9>Preset10</option>
           <option value=10>Preset11</option>
-          <option value=11>Preset12</option>
-          <option value=12>Preset13</option>
-          <option value=13>Preset14</option>
-          <option value=14>Preset15</option>
-          <option value=15>Preset16</option>
-          <option value=16>Preset17</option>
-          <option value=17>Preset18</option>
-          <option value=18>Preset19</option>
-          <option value=19>Preset20</option>
         </select>
-       <button class="button minus" onclick="presetchange(-1)">-</button>
-
      
       <button class="button button3">PullDown</button>
       <button class="button button4" ontouchstart="drumnoteOn(24)">Start/Stop</button>
