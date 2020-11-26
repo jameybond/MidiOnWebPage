@@ -472,15 +472,12 @@ function funcmove(x1,x2,x3)
   var y = event.touches[0].clientY;
   
   document.getElementById('demo').innerHTML = x + ', ' + y;
-  if(x>5)
+  if(x>5 || y>5)
     { noteOn(x1,x2,x3);
       touchmoveendflag = 1;
       }
    
-    if(y>5)
-    { noteOn(x1,x2,x3);
-      touchmoveendflag = 1;
-      } 
+    
    }
 }
 
