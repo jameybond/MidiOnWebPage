@@ -2,10 +2,13 @@
 var chordclass = document.getSelection().focusNode.parentElement.className;
 var lyricandchordhtml = document.getSelection().anchorNode.parentElement.offsetParent;
 
+
+
 var chordcount = lyricandchordhtml.getElementsByClassName(chordclass).length;
 for ( var x=0 ; x < chordcount; x++) 
-  {var element = lyricandchordhtml.getElementsByClassName(chordclass)[x]; 
-   var chordcap = element.innerText.trim();
+  {var element = lyricandchordhtml.getElementsByClassName(chordclass)[0]; 
+   
+var chordcap = element.innerText.trim();
    var chordary = chordcap.split("");
      var chordarylen = chordary.length;
      var chord = chordary[0];
@@ -18,10 +21,10 @@ for ( var x=0 ; x < chordcount; x++)
         };
      var chordtext = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
      var midinote = [ 60, 61,62,63,64,65,66,67,68,69,70,71];
-     var chordtype = ["m", "dim","sus","M7","m7","add9"];
-     var chordnot2 = [-1,-1,1,0,-1,0];
-     var chordnot3 = [0,-1,7,0,0,0];
-     var chordnot4 = [0,-1,7,-1,-2,2];
+     var chordtype = ["m", "dim","sus","M7","m7","add9","7"];
+     var chordnot2 = [-1,-1,1,0,-1,0,0];
+     var chordnot3 = [0,-1,7,0,0,0,0];
+     var chordnot4 = [0,-1,7,-1,-2,2,-1];
      var chordnote1 = chordtext.indexOf(chord);
          chord = chordtext[chordnote1];
          chordnote1 = Number(midinote[chordnote1]); 
@@ -34,8 +37,17 @@ for ( var x=0 ; x < chordcount; x++)
            }
       if (difbasenote==1){chordsuf="/"+chordsuf}
       var ChordTransposed = "noteOn("+ (chordnote1) +","+ (chordnote1+4+chordnote2) + "," + (chordnote1+7+chordnote3)+","+ (chordnote1+12+chordnote4) +")";
-      element.innerHTML = '<chordbutton ontouchstart='+ChordTransposed +'>' + chord + chordsuf  + '</button>';
-      element.removeAttribute("data-name");
-      element.removeAttribute("style");
+      
+      var attributesno = element.attributes.length;
+      for ( var x=0 ; x < attributesno; x++) 
+      {element.removeAttribute(element.attributes[0].name);}
+       
+      var att = document.createAttribute("class"); 
+      att.value = "chordbutton";                          
+      element.setAttributeNode(att);
+
+      att = document.createAttribute("ontouchstart"); 
+      att.value = ChordTransposed;                          
+      element.setAttributeNode(att);
   }
   lyricandchordhtml;})();
