@@ -19,7 +19,7 @@ var chordcap = element.innerText.trim();
         chordsuf= chordcap.slice(2);
         if(chordary[2] == "/"){difbasenote=1,chordsuf= chordcap.slice(3);};
         };
-     var chordtext = ["C", "C#",Db, "D", "D#",Eb, "E", "F", "F#",Gb, "G", "G#",Ab, "A", "A#",Bb, "B"];
+     var chordtext = ["C", "C#","Db", "D", "D#","Eb", "E", "F", "F#","Gb", "G", "G#","Ab", "A", "A#","Bb", "B"];
      var midinote = [ 60, 61,61,62,63,63,64,65,66,66,67,68,68,69,70,70,71];
      var chordtype = ["m", "dim","sus","M7","m7","add9","7"];
      var chordnot2 = [-1,-1,1,0,-1,0,0];
