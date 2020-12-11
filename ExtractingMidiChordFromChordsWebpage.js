@@ -38,9 +38,7 @@ var chordcap = element.innerText.trim();
       if (difbasenote==1){chordsuf="/"+chordsuf}
       var ChordTransposed = "noteOn("+ (chordnote1) +","+ (chordnote1+4+chordnote2) + "," + (chordnote1+7+chordnote3)+","+ (chordnote1+12+chordnote4) +")";
       
-      var attributesno = element.attributes.length;
-      for ( var x=0 ; x < attributesno; x++) 
-      {element.removeAttribute(element.attributes[0].name);}
+
        
       var att = document.createAttribute("class"); 
       att.value = "chordbutton";                          
