@@ -50,4 +50,4 @@ var chordcap = element.innerText.trim();
       att.value = ChordTransposed;                          
       element.setAttributeNode(att);
   }
-  lyricandchordhtml;})();
+var body = document.getElementsByTagName("body")[0]; body.replaceChildren(lyricandchordhtml.innerHTML);})();
