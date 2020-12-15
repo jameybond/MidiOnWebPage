@@ -48,4 +48,8 @@ var chordcap = element.innerText.trim();
       att.value = ChordTransposed;                          
       element.setAttributeNode(att);
   }
-var body = document.getElementsByTagName("body")[0]; body.replaceChildren(lyricandchordhtml.innerHTML);})();
+var x = document.createElement("TEXTAREA");
+  var t = document.createTextNode(lyricandchordhtml.innerHTML);
+  x.appendChild(t);
+  document.body.appendChild(x)  
+  ;})();
