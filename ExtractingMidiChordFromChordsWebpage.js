@@ -48,8 +48,8 @@ var chordcap = element.innerText.trim();
       att.value = ChordTransposed;                          
       element.setAttributeNode(att);
   }
-var x = document.createElement("TEXTAREA");
-  var t = document.createTextNode(lyricandchordhtml.innerHTML);
-  x.appendChild(t);
-  document.body.appendChild(x)  
-  ;})();
+ var x = document.createElement("TEXTAREA");
+ var t = document.createTextNode("<pre>" + lyricandchordhtml.innerHTML + "</pre>" );
+ x.appendChild(t);
+ document.body.appendChild(x); 
+  })();
