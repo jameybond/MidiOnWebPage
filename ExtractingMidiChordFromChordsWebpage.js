@@ -52,6 +52,10 @@ var x = document.createElement("TEXTAREA");
  var t = document.createTextNode("<pre>" + lyricandchordhtml.innerHTML + "</pre>" );
  x.appendChild(t);
 
+var att1 = document.createAttribute("style"); 
+    att1.value = "width:500px; height:200px;";                          
+    x.setAttributeNode(att1);
+
  var att2 = document.createAttribute("onfocus"); 
     att2.value = "this.select();";                          
     x.setAttributeNode(att2);
