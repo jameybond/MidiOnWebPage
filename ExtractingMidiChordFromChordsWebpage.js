@@ -48,8 +48,13 @@ var chordcap = element.innerText.trim();
       att.value = ChordTransposed;                          
       element.setAttributeNode(att);
   }
- var x = document.createElement("TEXTAREA");
+var x = document.createElement("TEXTAREA");
  var t = document.createTextNode("<pre>" + lyricandchordhtml.innerHTML + "</pre>" );
  x.appendChild(t);
- document.body.appendChild(x); 
+
+ var att2 = document.createAttribute("onfocus"); 
+    att2.value = "this.select();";                          
+    x.setAttributeNode(att2);
+    
+ document.body.appendChild(x);
   })();
