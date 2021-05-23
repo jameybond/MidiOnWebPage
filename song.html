@@ -7,7 +7,7 @@
 
 
 <style>
- .body {
+  .body {
   background: white;
   color: #333;
   font-weight: 300;
@@ -22,20 +22,37 @@
   user-select: none;
 }
 
-.navbartop {
+html,body {
+    overflow: hidden;
+    height:100%;
+}
+
+#navbartop {
       overflow: hidden;
       position: fixed;
       top: 0;
       width: 100%;
-      height: 8%;
+      height: 6%;
       background-color: rgba(0, 0, 0, 0.4);
+    -webkit-touch-callout: none;
+      /* iOS Safari */
+      -webkit-user-select: none;
+      /* Safari */
+      user-select: none;
+      /* Non-prefixed version, currently supported by Chrome and Opera */
+ 
+}
+
+#interact{
+  position:relative;
+  top:4.5%;
+  
 }
 
 .navbarrightlead {
       overflow: hidden;
-      background-color: #333;
+      background-color: rgb(96, 86, 100);;
       position: fixed;
-      top: 8%;
       right: 10%;
       width: 10%;
       height: 95%;
@@ -44,7 +61,6 @@
       overflow: hidden;
       background-color: rgb(96, 86, 100);
       position: fixed;
-      top: 8%;
       right: 0;
       width: 10%;
       height: 95%;
@@ -54,7 +70,6 @@
       overflow: hidden;
       background-color: rgb(96, 86, 100);
       position: fixed;
-      top: 8%;
       left: 0;
       width: 15%;
       height: 95%;
@@ -64,7 +79,19 @@
       /* Safari */
       user-select: none;
       /* Non-prefixed version, currently supported by Chrome and Opera */
-    
+    }
+.midframe {height: 100%; width: 100%;}
+
+.frame {
+      overflow: hidden;
+      background-color: #33653;
+      position: fixed;
+      left: 15%;
+      height: 100%;
+      width: 65%;
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
     }
 
 .chordbutton {
@@ -76,7 +103,7 @@
       text-decoration: none;
       border: 1px solid #cccccc;
       border-radius: 10px;
-      padding: 5px 0;
+      padding: 6px 0;
       display: block;
       width: 100%;
       -webkit-touch-callout: none;
@@ -96,7 +123,7 @@
       text-decoration: none;
       border: 1px solid #cccccc;
       border-radius: 10px;
-      padding: 5px 0;
+      padding: 6px 0;
       display: block;
       width: 100%;
       -webkit-touch-callout: none;
@@ -116,7 +143,7 @@
       text-decoration: none;
       border: 1px solid #cccccc;
       border-radius: 10px;
-      padding: 5px 0;
+      padding: 6px 0;
       display: block;
       width: 100%;
       -webkit-touch-callout: none;
@@ -147,10 +174,9 @@
   border-right: none; /* Prevent double borders */
 }
 
-
 .button1 {float: left; width: 15%;}
 .plus{float: left; top:2%; width:5%; }  
-.Preset{float: left; top: 2%; height:70%;}  
+.Preset{float: left; top: 2%;}  
 .minus{float: left; top:2%; width:5%; }
 .button3 {float: right; width: 10%;}
 .button4 {float: right; width: 10%;}
@@ -160,27 +186,17 @@
 .transbutton { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; margin-left: 0%;}
 .minor{background-color: 40BAA4;}
 
-.midframe {height: 100%; width: 100%;}
+.transbutton{width: 15%;}
 
 
-.frame {
-      overflow: hidden;
-      background-color: #33653;
-      position: fixed;
-      top: 8%;
-      left: 15%;
-      height: 100%;
-      width: 65%;
-      -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-      user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 
-    }
 
-html,body {
-    overflow: hidden;
-    height: 100%;
-}
+
+
+
+
+
+
 
 </style>
   
@@ -230,6 +246,9 @@ var midiAccess = null;
     var Q = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent for lead Notes
     var R = [0,0,0]; // to capture note on value that was has been sent so a corresponding note off can be sent for Drum Note
     var touchmoveendflag =0;
+    var touchmoveendbassflag =0;
+    var bassyposition;
+
 
   
     function setup() {
@@ -237,6 +256,11 @@ var midiAccess = null;
         window.navigator.requestMIDIAccess({
           sysex: false
         }).then(success);
+        
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        var x = document.getElementById("demo");
+        x.innerHTML = "W:" + w + ",h:" + h + "";
       }
 
       
@@ -339,14 +363,15 @@ var midiAccess = null;
         var chordcap = buts[i].innerHTML;
         chordcap = chordcap.trim();
         var a = chordtext.indexOf(chordcap);
-        if (((a + x) == 12) || ((a + x) == -1)) {a = a + ((-(x)) * 12)};
+        if (((a + x) == 12) || ((a + x) == -1)) {a = a + ((-(x)) * 12);}
         chord = chordtext[a + x];
         var noteval = buts[i].getAttribute("ontouchstart"); noteval = noteval.split("(")[1] ; noteval = noteval.split(")")[0];
 
         var ChordTransposed = "bassnoteOn("+(Number(noteval)+x)+")";
         buts[i].innerHTML = chord;
         buts[i].setAttribute("ontouchstart", ("bassnoteOn("+(Number(noteval)+x)+")"));
-        buts[i].setAttribute("ontouchend", ("bassnoteOff("+(Number(noteval)+x)+")"));}
+        buts[i].setAttribute("ontouchend", ("bassnoteOff("+(Number(noteval)+x)+")"));
+        buts[i].setAttribute("ontouchmove", ("funcmovebass("+(Number(noteval)+x)+")"));}
       }   
     }
 
@@ -358,9 +383,10 @@ var midiAccess = null;
           X = [p,123, "0x00"];
           Y = ["0xBA",123, "0x00"];
           noteOff();}} */
-      noteOff()
+      noteOff();
       bassnoteOff();
       drumnoteOff();
+      leadnoteOff();
     }
  
      
@@ -407,11 +433,11 @@ var midiAccess = null;
 
     function bassnoteOn(note) {
       bassnoteOff();
+      bassyposition=event.touches[0].clientY;
       var iter = midiAccess.outputs.values();
       for (var o = iter.next(); !o.done; o = iter.next()) {
         o.value.send([0x91, note, 0x7f], window.performance.now());
         P = ["0x81", note, "0x00"];
-
       }
     }
   
@@ -468,28 +494,78 @@ function presetchange(val) {
  
 
 function funcmove(x1,x2,x3) 
-{   
-  if(!(touchmoveendflag == 1))
-  {  
-  var x = event.touches[0].clientX;
+{ if((touchmoveendflag == !1))
+  {var x = event.touches[0].clientX;
   var y = event.touches[0].clientY;
   
   document.getElementById('demo').innerHTML = x + ', ' + y;
-  if(x>5 || y>5)
-    { noteOn(x1,x2,x3);
-      touchmoveendflag = 1;
-      }
-   
-    
+  noteOn(x1,x2,x3);
+  touchmoveendflag = 1;
    }
 }
 
-function touchmoveend(){
-  touchmoveendflag = 0;
-  
+function touchmoveend(){touchmoveendflag = 0;}
+
+
+
+
+function chordedit(){
+  var frameupdate ="https://www.yahoo.com"
+  document.getElementsByClassName('midframe').src ="";
+    
 }
- 
-    window.onload = function() {setup();}
+
+window.onload = function() {setup();}
+
+function toShow() {
+  var navbartop = document.getElementById("navbartop");
+  var interact = document.getElementById("interact");
+  
+  if (navbartop.style.height == "6%"){
+    navbartop.style.height = '60%';
+    interact.style.top = '40%';
+  }else{
+    navbartop.style.height = '6%';
+    interact.style.top = '4.5%';
+  }
+}  
+///------///
+    
+function funcmovebass(x1) 
+{ if((touchmoveendflag!==1))
+  {var x = event.touches[0].clientX;
+  var y = bassyposition-event.touches[0].clientY;
+   var pitchblend = "e0"
+  
+ document.getElementById('demo').innerHTML = (y*10)+ ', ' + y/10;
+   //document.getElementById('demo').innerHTML = [225, 64+(x/3),y/2];
+   
+   
+   
+   var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send([225, 64+(y*10),64+(y/10)], window.performance.now());
+      }
+  touchmoveendbassflag = 1;
+   }
+}
+function touchmoveendbass(){
+  touchmoveendbassflag = 0;
+  var iter = midiAccess.outputs.values();
+      for (var o = iter.next(); !o.done; o = iter.next()) {
+        o.value.send([225,0,64], window.performance.now());
+      }
+}
+
+
+
+
+
+    
+    
+
+
+
 </script>
   
  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -498,8 +574,8 @@ function touchmoveend(){
 
 
   
- <body>
-    <div class="navbartop"> 
+<body>
+    <div id="navbartop"> 
       <div class="btn-group">
       <button class="button button1" onclick="panic()">Panic</button>
      
@@ -531,33 +607,42 @@ function touchmoveend(){
           
           
           
-      <button class="button button3">PullDown</button>
+      <button class="button button3" onclick="toShow()">Menu</button>
       <button class="button button4" ontouchstart="drumnoteOn(24)">Start/Stop</button>
       <button class="button button5" ontouchstart="drumnoteOn(25)">Drum3</button>
       <button class="button button6" ontouchstart="drumnoteOn(26)">Drum2</button>
       <button class="button button7" ontouchstart="drumnoteOn(27)">Drum1</button>
       </div>
-   </div>
-
-   <div class="navbarleft">
+      
+      
+      <div id="controls">
       <button class="transbutton" onclick="FuncTranspose(-1)">-Trans</button>
-      <button class="bassbutton minor" ontouchstart="bassnoteOn(62)" ontouchend="bassnoteOff(62)">D</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(60)" ontouchend="bassnoteOff(60)">C</button>
-      <button class="bassbutton minor" ontouchstart="bassnoteOn(59)" ontouchend="bassnoteOff(59)">B</button>
-      <button class="bassbutton minor" ontouchstart="bassnoteOn(57)" ontouchend="bassnoteOff(57)">A</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(55)" ontouchend="bassnoteOff(55)">G</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(53)" ontouchend="bassnoteOff(53)">F</button>
-      <button class="bassbutton minor" ontouchstart="bassnoteOn(52)" ontouchend="bassnoteOff(52)">E</button>
-      <button class="bassbutton minor" ontouchstart="bassnoteOn(50)" ontouchend="bassnoteOff(50)">D</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(48)" ontouchend="bassnoteOff(48)">C</button>
-      <button class="bassbutton minor" ontouchstart="bassnoteOn(47)" ontouchend="bassnoteOff(47)">B</button>
-      <button class="bassbutton minor" ontouchstart="bassnoteOn(45)" ontouchend="bassnoteOff(45)">A</button>
-      <button class="bassbutton" ontouchstart="bassnoteOn(43)" ontouchend="bassnoteOff(43)">G</button>
-     <p id="demo">fromJScorrection</p>
+      <button class="transbutton" onclick="FuncTranspose(1)">+Trans</button>
+      <div id="demo1">demo1</div>
+       </div>
+      
+   </div>
+   
+   
+<div id="interact">
+   <div class="navbarleft">
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(62)" ontouchend="bassnoteOff(62)" ontouchmove="funcmovebass(62)" ontouchend="touchmoveendbass()">D</button>
+      <button class="bassbutton" ontouchstart="bassnoteOn(60)" ontouchend="bassnoteOff(60)" ontouchmove="funcmovebass(60)" ontouchend="touchmoveendbass()">C</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(59)" ontouchend="bassnoteOff(59)" ontouchmove="funcmovebass(59)" ontouchend="touchmoveendbass()">B</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(57)" ontouchend="bassnoteOff(57)" ontouchmove="funcmovebass(57)" ontouchend="touchmoveendbass()">A</button>
+      <button class="bassbutton" ontouchstart="bassnoteOn(55)" ontouchend="bassnoteOff(55)" ontouchmove="funcmovebass(55)" ontouchend="touchmoveendbass()">G</button>
+      <button class="bassbutton" ontouchstart="bassnoteOn(53)" ontouchend="bassnoteOff(53)" ontouchmove="funcmovebass(53)" ontouchend="touchmoveendbass()">F</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(52)" ontouchend="bassnoteOff(52)" ontouchmove="funcmovebass(52)" ontouchend="touchmoveendbass()">E</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(50)" ontouchend="bassnoteOff(50)" ontouchmove="funcmovebass(50)" ontouchend="touchmoveendbass()">D</button>
+      <button class="bassbutton" ontouchstart="bassnoteOn(48)" ontouchend="bassnoteOff(48)" ontouchmove="funcmovebass(48)" ontouchend="touchmoveendbass()">C</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(47)" ontouchend="bassnoteOff(47)"  ontouchmove="funcmovebass(47)" ontouchend="touchmoveendbass()">B</button>
+      <button class="bassbutton minor" ontouchstart="bassnoteOn(45)" ontouchend="bassnoteOff(45)" ontouchmove="funcmovebass(45)" ontouchend="touchmoveendbass()">A</button>
+      <button class="bassbutton" ontouchstart="bassnoteOn(43)" ontouchend="bassnoteOff(43)" ontouchmove="funcmovebass(43)" ontouchend="touchmoveendbass()">G</button>
+      <button class="bassbutton" ontouchstart="bassnoteOn(41)" ontouchend="bassnoteOff(41)" onmousemove="funcmovebass(41)" ontouchmove="funcmovebass(41)" ontouchend="touchmoveendbass()" onmouseout="touchmoveendbass()" >F</button>
+     <p id="demo">Praise Him only</p>
     </div>
 
     <div class="navbarrightlead">
-      <button class="transbutton"  onclick="FuncTranspose(1)">+Trans</button>
       <button class="leadbutton minor" ontouchstart="leadnoteOn(74)" ontouchmove="funcmove(74,77,81)" ontouchend="touchmoveend()">D</button>
       <button class="leadbutton" ontouchstart="leadnoteOn(72)" ontouchmove="funcmove(72,76,79)" ontouchend="touchmoveend()">C</button>
       <button class="leadbutton minor" ontouchstart="leadnoteOn(71)" ontouchmove="funcmove(71,74,77)" ontouchend="touchmoveend()">B</button>
@@ -570,10 +655,10 @@ function touchmoveend(){
       <button class="leadbutton minor" ontouchstart="leadnoteOn(59)" ontouchmove="funcmove(59,62,65)" ontouchend="touchmoveend()">B</button>
       <button class="leadbutton minor" ontouchstart="leadnoteOn(57)" ontouchmove="funcmove(57,60,64)" ontouchend="touchmoveend()">A</button>
       <button class="leadbutton" ontouchstart="leadnoteOn(55)" ontouchmove="funcmove(55,59,62)" ontouchend="touchmoveend()">G</button>
+      <button class="leadbutton" ontouchstart="leadnoteOn(53)" ontouchmove="funcmove(53,57,59)" ontouchend="touchmoveend()">F</button>
     </div>
 
     <div class="navbarright">
-      <button class="transbutton"  onclick="FuncTranspose(1)">+Trans</button>
       <button class="chordbutton minor" ontouchstart="noteOn(74,77,81)">Dm</button>
       <button class="chordbutton" ontouchstart="noteOn(72,76,79)">C</button>
       <button class="chordbutton minor" ontouchstart="noteOn(71,74,77)">Bdim</button>
@@ -586,12 +671,14 @@ function touchmoveend(){
       <button class="chordbutton minor" ontouchstart="noteOn(59,62,65)">Bdim</button>
       <button class="chordbutton minor" ontouchstart="noteOn(57,60,64)">Am</button>
       <button class="chordbutton" ontouchstart="noteOn(55,59,62)">G</button>
+      <button class="chordbutton" ontouchstart="noteOn(53,57,59)">F</button>
     </div>
 
-
-<div class="frame">
-<iframe class="midframe" src="https://www.google.com/search?igu=1" ></iframe>
+    <div class="frame">
+      <iframe class="midframe" id="midframe" src="https://www.google.com/search?igu=1" ></iframe>
+      </div>
+   
 </div>
-                                                                                                               
+                                                                                                                 
 </body>
 </Html>
