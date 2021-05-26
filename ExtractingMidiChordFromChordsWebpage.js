@@ -22,21 +22,24 @@ var chordcap = element.innerText.trim();
         };
      var chordtext = ["C", "C#","Db", "D", "D#","Eb", "E", "F", "F#","Gb", "G", "G#","Ab", "A", "A#","Bb", "B"];
      var midinote = [ 60, 61,61,62,63,63,64,65,66,66,67,68,68,69,70,70,71];
-     var chordtype = ["m", "dim","sus","M7","m7","add9","7","2","4","aug","dim","7sus"];
-     var chordnot2 = [-1,-1,1,0,-1,0,0,-2,0,0,-1,3];/* increase or decrease to 4*/
-     var chordnot3 = [0,-1,7,0,0,0,0,0,0,+1,-1,4]; /* increase or decrease to 7*/
-     var chordnot4 = [0,-1,7,-1,-2,2,-2,0,-7,0,0,0]; /* increase or decrease to 12 */
+     var chordtype = ["m","dim","sus","M7","m7","add9","7","2","4","aug","dim","7sus","9","sus2","sus4"];
+     var chordnot2 = [-1 , -1  ,  1  , 0  , -1 ,  0   , 0 ,-2 , 0 ,  0  , -1  ,   3  , 0 , -2   ,  1   ];/* increase or decrease from 4*/
+     var chordnot3 = [ 0 , -1  ,  7  , 0  ,  0 ,  0   , 0 , 0 , 0 , +1  , -1  ,   4  , 0 ,  0   ,  0   ]; /* increase or decrease from 7*/
+     var chordnot4 = [ 0 , -1  ,  7  ,-1  , -2 ,  2   ,-2 , 0 ,-7 ,  0  ,  0  ,   0  , 2 ,  0   ,  0   ]; /* increase or decrease from 12 */
      var chordnote1 = chordtext.indexOf(chord);
          chord = chordtext[chordnote1];
-         chordnote1 = Number(midinote[chordnote1]); 
+         chordnote1 = Number(midinote[chordnote1]);
+     var chordnote2;
+     var chordnote3;
+     var chordnote4;
 
-     if ( chordsuf ==""){var chordnote2 = 0; var chordnote3 = 0;var chordnote4=0;}
-     else if (difbasenote==1){var chordnote2 = 0; var chordnote3 = 0;var chordnote4 = chordtext.indexOf(chordsuf);chordnote4 = Number(midinote[chordnote4])-chordnote1-24;}
-     else {var chordnote2 = chordnot2[chordtype.indexOf(chordsuf)]; 
-           var chordnote3 = chordnot3[chordtype.indexOf(chordsuf)];
-           var chordnote4 = chordnot4[chordtype.indexOf(chordsuf)];
+     if ( chordsuf ===""){chordnote2 = 0; chordnote3 = 0;chordnote4=0;}
+     else if (difbasenote==1){chordnote2 = 0; chordnote3 = 0;chordnote4 = chordtext.indexOf(chordsuf);chordnote4 = Number(midinote[chordnote4])-chordnote1-24;}
+     else {chordnote2 = chordnot2[chordtype.indexOf(chordsuf)]; 
+           chordnote3 = chordnot3[chordtype.indexOf(chordsuf)];
+           chordnote4 = chordnot4[chordtype.indexOf(chordsuf)];
            }
-      if (difbasenote==1){chordsuf="/"+chordsuf}
+      if (difbasenote==1){chordsuf="/"+chordsuf;}
       var ChordTransposed = "noteOn("+ (chordnote1) +","+ (chordnote1+4+chordnote2) + "," + (chordnote1+7+chordnote3)+","+ (chordnote1+12+chordnote4) +")";
       
 
@@ -49,22 +52,21 @@ var chordcap = element.innerText.trim();
       att.value = ChordTransposed;                          
       element.setAttributeNode(att);
   }
-var x = document.createElement("TEXTAREA");
+var textarea = document.createElement("TEXTAREA");
  var t = document.createTextNode("<pre>" + lyricandchordhtml.innerHTML + "</pre>" );
- x.appendChild(t);
+ textarea.appendChild(t);
 
 var att1 = document.createAttribute("style"); 
     att1.value = "width:500px; height:200px;";                          
-    x.setAttributeNode(att1);
+    textarea.setAttributeNode(att1);
 
  var att2 = document.createAttribute("onfocus"); 
     att2.value = "this.select();";                          
-    x.setAttributeNode(att2);
+    textarea.setAttributeNode(att2);
     
   
   
 /* document.body.appendChild(x); */
-document.body.insertBefore(x, document.body.childNodes[0]);
+document.body.insertBefore(textarea, document.body.childNodes[0]);
 
 })();
-
