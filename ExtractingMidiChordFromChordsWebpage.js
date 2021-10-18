@@ -14,11 +14,11 @@ var chordcap = element.innerText.trim();
      var chordarylen = chordary.length;
      var chord = chordary[0];
      var chordsuf = chordcap.slice(1);
-          var difbasenote=0; if(chordary[1] == "/"){difbasenote=1,chordsuf= chordcap.slice(2);};
+          var difbasenote=0; if(chordary[1] == "/"){difbasenote=1;chordsuf= chordcap.slice(2);};
      if((chordary[1] == "#") || (chordary[1] == "b"))
        {chord = chord+chordary[1]; 
         chordsuf= chordcap.slice(2);
-        if(chordary[2] == "/"){difbasenote=1,chordsuf= chordcap.slice(3);};
+        if(chordary[2] == "/"){difbasenote=1;chordsuf=chordcap.slice(3);};
         };
      var chordtext = ["C", "C#","Db", "D", "D#","Eb", "E", "F", "F#","Gb", "G", "G#","Ab", "A", "A#","Bb", "B"];
      var midinote = [ 60, 61,61,62,63,63,64,65,66,66,67,68,68,69,70,70,71];
@@ -45,7 +45,7 @@ var chordcap = element.innerText.trim();
 
        
       var att = document.createAttribute("class"); 
-      att.value = "chordbutton";                          
+      att.value = "lyricchordbutton";                          
       element.setAttributeNode(att);
 
       att = document.createAttribute("ontouchstart"); 
@@ -53,20 +53,70 @@ var chordcap = element.innerText.trim();
       element.setAttributeNode(att);
   }
 var textarea = document.createElement("TEXTAREA");
+//var textarea = document.createElement("input");
  var t = document.createTextNode("<pre>" + lyricandchordhtml.innerHTML + "</pre>" );
  textarea.appendChild(t);
+  
+  //event.clipboardData.setData('text/plain', t);
 
 var att1 = document.createAttribute("style"); 
     att1.value = "width:500px; height:200px;";                          
+    textarea.setAttributeNode(att1);
+ 
+  var att1 = document.createAttribute("id"); 
+    att1.value = "textarea";                          
     textarea.setAttributeNode(att1);
 
  var att2 = document.createAttribute("onfocus"); 
     att2.value = "this.select();";                          
     textarea.setAttributeNode(att2);
-    
+ 
   
-  
-/* document.body.appendChild(x); */
 document.body.insertBefore(textarea, document.body.childNodes[0]);
+  
+  var copyBobBtn = document.getElementById("textarea");
+  copyBobBtn.addEventListener('click', function(event){document.execCommand('copy');});
+  
 
 })();
+
+
+/*copy(document.getElementsByClassName(textarea));
+ document.body.appendChild(x); 
+  
+  document.getElementById("copyBtn").onclick = function() {
+  document.execCommand('copy');
+}
+  
+  
+  
+  function copy() {
+  var copyText = document.querySelector("#input");
+  copyText.select();
+  document.execCommand("copy");
+}
+
+document.querySelector("#textarea").addEventListener("click", copy);
+
+copyBobBtn.addEventListener('click', function(event){ copyTextToClipboard('Bob');});
+  
+  
+
+
+function myFunction(x) {
+  x.style.background = "yellow";
+  x.select();
+  document.execCommand("copy");
+}
+
+
+const source = document.querySelector('div.source');
+
+source.addEventListener('copy', (event) => {
+    const selection = document.getSelection();
+    event.clipboardData.setData('text/plain', selection.toString().toUpperCase());
+    event.preventDefault();
+});
+
+
+*/
